@@ -14,10 +14,10 @@ const Header: React.FC = () => {
   return (
     <header className="flex items-center gap-2 h-20">
       {/* Navigation Pill */}
-      <div className="flex-1 bg-[#f4f2ee] h-full rounded-[24px] flex items-center px-8 border-2 border-black/5">
-        <Link to="/" className="flex items-center gap-2 pr-8 border-r border-black/10">
-          <img src="/fca-logo.png" alt="Friendly Care Logo" className="w-10 h-10 object-contain" />
-          <span className="text-2xl font-black tracking-tighter text-navy uppercase">Friendly Care</span>
+      <div className="flex-1 bg-[#f4f2ee] h-full rounded-[24px] flex items-center px-4 md:px-8 border-2 border-black/5">
+        <Link to="/" className="flex items-center gap-2 pr-4 md:pr-8 border-r border-black/10">
+          <img src="/fca-logo.png" alt="Friendly Care Logo" className="w-8 h-8 md:w-10 md:h-10 object-contain" />
+          <span className="text-xl md:text-2xl font-black tracking-tighter text-navy uppercase leading-none">Friendly Care</span>
         </Link>
 
         <nav className="hidden xl:flex items-center gap-10 pl-10">
@@ -45,10 +45,10 @@ const Header: React.FC = () => {
 
       {/* User Actions */}
       <div className="flex items-center gap-2 h-full">
-        <Link to="/role-selection" className="w-20 h-full flex items-center justify-center bg-mint rounded-[24px] text-navy hover:brightness-95 transition-all">
+        <Link to="/role-selection" className="w-14 md:w-20 h-full flex items-center justify-center bg-mint rounded-[24px] text-navy hover:brightness-95 transition-all">
           <User size={24} strokeWidth={2.5} />
         </Link>
-        <a href="tel:4789734831" className="px-10 h-full bg-mint rounded-[24px] text-navy font-black uppercase text-xs tracking-[0.2em] hover:brightness-95 transition-all whitespace-nowrap flex items-center">
+        <a href="tel:4789734831" className="px-4 md:px-10 h-full bg-mint rounded-[24px] text-navy font-black uppercase text-[10px] md:text-xs tracking-[0.2em] hover:brightness-95 transition-all whitespace-nowrap flex items-center">
           Call Today
         </a>
       </div>

@@ -11,10 +11,10 @@ const Hero: React.FC = () => {
 
       {/* Top Typography (Background Layer) */}
       <div className="w-full text-center z-0 mt-8">
-        <p className="text-xl md:text-2xl font-bold text-mint uppercase tracking-widest mb-4">
+        <p className="text-xs md:text-xl lg:text-2xl font-bold text-mint uppercase tracking-widest mb-4">
           Get Paid To Care Of Your Loved Ones
         </p>
-        <h1 className="text-[9vw] font-black text-navy leading-[0.8] tracking-tighter uppercase select-none whitespace-nowrap">
+        <h1 className="text-[12vw] md:text-[9vw] font-black text-navy leading-[0.8] tracking-tighter uppercase select-none whitespace-nowrap">
           YOUR HEALTH,
         </h1>
       </div>
@@ -34,26 +34,26 @@ const Hero: React.FC = () => {
 
       {/* Bottom Typography (Foreground Layer) */}
       <div className="absolute bottom-[28%] w-full text-center z-20 pointer-events-none">
-        <h1 className="text-[9vw] font-black text-navy leading-[0.8] tracking-tighter uppercase select-none whitespace-nowrap">
+        <h1 className="text-[12vw] md:text-[9vw] font-black text-navy leading-[0.8] tracking-tighter uppercase select-none whitespace-nowrap">
           OUR PRIORITY
         </h1>
       </div>
 
       {/* Bottom Controls Area */}
-      <div className="absolute bottom-12 left-12 right-12 flex justify-between items-end z-30">
-        <div className="max-w-[200px]">
-          <p className="text-[14px] font-extrabold text-slate-500 uppercase leading-relaxed tracking-widest">
+      <div className="absolute bottom-4 md:bottom-12 left-4 md:left-12 right-4 md:right-12 flex flex-col md:flex-row justify-between items-center md:items-end gap-4 md:gap-0 z-30">
+        <div className="max-w-[200px] text-center md:text-left hidden md:block">
+          <p className="text-[12px] md:text-[14px] font-extrabold text-slate-500 uppercase leading-relaxed tracking-widest">
             GA's #1 Choice <br /> For Home Care
           </p>
         </div>
 
-        <div className="flex items-center">
-          <Link to="/#eligibility" className="flex items-center group">
-            <button className="bg-mint h-16 px-10 rounded-l-[24px] border-r-2 border-black/10 font-black text-navy text-xs uppercase tracking-[0.2em] group-hover:brightness-95 transition-all">
+        <div className="flex items-center w-full md:w-auto">
+          <Link to="/#eligibility" className="flex items-center group w-full md:w-auto">
+            <button className="flex-1 md:flex-none bg-mint h-14 md:h-16 px-6 md:px-10 rounded-l-[20px] md:rounded-l-[24px] border-r-2 border-black/10 font-black text-navy text-[10px] md:text-xs uppercase tracking-[0.2em] group-hover:brightness-95 transition-all">
               Check My Eligibility
             </button>
-            <div className="bg-mint w-16 h-16 rounded-r-[24px] flex items-center justify-center group-hover:brightness-95 transition-all cursor-pointer">
-              <ArrowUpRight size={28} className="text-navy" strokeWidth={3} />
+            <div className="bg-mint w-14 md:w-16 h-14 md:h-16 rounded-r-[20px] md:rounded-r-[24px] flex items-center justify-center group-hover:brightness-95 transition-all cursor-pointer">
+              <ArrowUpRight size={24} className="text-navy" strokeWidth={3} />
             </div>
           </Link>
         </div>

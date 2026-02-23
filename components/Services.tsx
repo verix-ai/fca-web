@@ -25,9 +25,9 @@ const Services: React.FC = () => {
 
   return (
     <section id="services">
-      <div className="grid md:grid-cols-3 divide-x-8 divide-black">
+      <div className="grid md:grid-cols-3 divide-y-8 md:divide-y-0 md:divide-x-8 divide-black">
         {steps.map((item, idx) => (
-          <a key={idx} href="#eligibility" className={`${item.color} p-12 lg:p-16 min-h-[450px] flex flex-col justify-between group cursor-pointer transition-all hover:brightness-105 block`}>
+          <a key={idx} href="#eligibility" className={`${item.color} p-8 md:p-12 lg:p-16 min-h-[350px] md:min-h-[450px] flex flex-col justify-between group cursor-pointer transition-all hover:brightness-105 block`}>
             <div className="space-y-6">
               <span className="text-navy font-black text-sm uppercase tracking-widest bg-white/20 px-4 py-2 rounded-full w-fit backdrop-blur-sm border border-black/5">
                 {item.step}

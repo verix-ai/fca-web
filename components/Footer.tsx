@@ -6,12 +6,12 @@ const Footer: React.FC = () => {
     <footer className="bg-[#0c1214] text-white p-12 lg:p-20">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row justify-between items-center gap-16 pb-16 border-b border-white/10">
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col items-center md:flex-row gap-3">
             <img src="/fca-logo.png" alt="Friendly Care Logo" className="w-12 h-12 object-contain" />
-            <span className="text-4xl font-black tracking-tighter uppercase">Friendly Care</span>
+            <span className="text-4xl font-black tracking-tighter uppercase text-center md:text-left">Friendly Care</span>
           </div>
 
-          <nav className="flex flex-wrap justify-center gap-12 text-[11px] font-black uppercase tracking-[0.3em] text-slate-500">
+          <nav className="flex flex-col md:flex-row flex-wrap justify-center items-center gap-6 md:gap-12 text-[11px] font-black uppercase tracking-[0.3em] text-slate-500">
             <a href="#" className="hover:text-mint transition-colors">Services</a>
             <a href="#" className="hover:text-mint transition-colors">Specialists</a>
             <a href="#" className="hover:text-mint transition-colors">Privacy Policy</a>

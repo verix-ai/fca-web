@@ -50,13 +50,13 @@ const Testimonials: React.FC = () => {
 
         <div className="relative max-w-5xl mx-auto">
           {/* Main Card */}
-          <div className="bg-mint rounded-[48px] p-12 lg:p-24 relative overflow-hidden text-center flex flex-col items-center transition-all duration-300">
+          <div className="bg-mint rounded-[48px] p-8 md:p-12 lg:p-24 relative overflow-hidden text-center flex flex-col items-center transition-all duration-300">
             {/* Massive background quote mark */}
-            <Quote className="absolute -top-12 -left-12 w-64 h-64 text-black/5" />
+            <Quote className="absolute -top-6 -left-6 md:-top-12 md:-left-12 w-32 h-32 md:w-64 md:h-64 text-black/5" />
 
-            <Quote className="w-16 h-16 text-black/20 mb-8" />
+            <Quote className="w-10 h-10 md:w-16 md:h-16 text-black/20 mb-6 md:mb-8" />
 
-            <p className="text-2xl lg:text-4xl font-black text-navy leading-[1.1] tracking-tighter uppercase mb-12 max-w-3xl italic min-h-[120px] flex items-center justify-center">
+            <p className="text-xl md:text-2xl lg:text-4xl font-black text-navy leading-[1.1] tracking-tighter uppercase mb-8 md:mb-12 max-w-3xl italic min-h-[160px] md:min-h-[120px] flex items-center justify-center">
               "{current.text}"
             </p>
 
@@ -74,7 +74,8 @@ const Testimonials: React.FC = () => {
           </div>
 
           {/* Navigation Controls */}
-          <div className="absolute top-1/2 -translate-y-1/2 -left-6 lg:-left-12">
+          {/* Desktop Controls (Absolute) */}
+          <div className="hidden lg:block absolute top-1/2 -translate-y-1/2 -left-12">
             <button
               onClick={prev}
               className="w-16 h-16 bg-white border-2 border-black/5 rounded-full shadow-xl flex items-center justify-center text-slate-300 hover:text-navy transition-all cursor-pointer z-10"
@@ -82,12 +83,28 @@ const Testimonials: React.FC = () => {
               <ArrowLeft size={32} />
             </button>
           </div>
-          <div className="absolute top-1/2 -translate-y-1/2 -right-6 lg:-right-12">
+          <div className="hidden lg:block absolute top-1/2 -translate-y-1/2 -right-12">
             <button
               onClick={next}
               className="w-16 h-16 bg-peach text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition-all cursor-pointer z-10"
             >
               <ArrowRight size={32} />
+            </button>
+          </div>
+
+          {/* Mobile Controls (Inline Flow) */}
+          <div className="flex lg:hidden justify-center items-center gap-6 mt-8">
+            <button
+              onClick={prev}
+              className="w-14 h-14 bg-white border-2 border-black/5 rounded-full shadow-xl flex items-center justify-center text-slate-300 hover:text-navy transition-all cursor-pointer z-10"
+            >
+              <ArrowLeft size={28} />
+            </button>
+            <button
+              onClick={next}
+              className="w-14 h-14 bg-peach text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition-all cursor-pointer z-10"
+            >
+              <ArrowRight size={28} />
             </button>
           </div>
         </div>
