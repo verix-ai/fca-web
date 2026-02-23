@@ -12,7 +12,7 @@ const StaffPage: React.FC = () => {
     ];
 
     return (
-        <section className="py-24 px-4 bg-[#f8fafc] min-h-screen">
+        <section className="py-24 px-4 bg-[#f4f2ee] min-h-screen rounded-[40px]">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col items-center mb-16 gap-6 text-center">
                     <div className="space-y-4">

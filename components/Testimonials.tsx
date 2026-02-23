@@ -37,7 +37,7 @@ const Testimonials: React.FC = () => {
   const current = testimonials[currentIndex];
 
   return (
-    <section className="py-24 px-6 lg:px-12 bg-white">
+    <section className="py-24 px-6 lg:px-12 bg-[#f4f2ee]">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16 space-y-4">
           <div className="inline-block px-4 py-1.5 bg-slate-50 text-slate-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-black/5">

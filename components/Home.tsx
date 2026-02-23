@@ -31,7 +31,7 @@ const Home: React.FC = () => {
                 <WhyChooseUs />
             </section>
 
-            <section className="inner-content bg-white">
+            <section className="inner-content bg-[#f4f2ee]">
                 <Testimonials />
             </section>
 
@@ -39,7 +39,7 @@ const Home: React.FC = () => {
                 <Team />
             </section>
 
-            <section className="inner-content bg-white">
+            <section className="inner-content bg-[#f4f2ee]">
                 <EligibilityForm />
             </section>
         </div>

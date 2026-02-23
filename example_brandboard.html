@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Serenity Luxury Condos — Brand Board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Khand:wght@400;700&family=Prompt:wght@300;400;600&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <style>
+    /* ===== CSS VARIABLES ===== */
+    :root {
+      --primary: #bda887;
+      --bg-light: #d8d8d8;
+      --bg-dark: #242323;
+      --slate-accent: #8e8c89;
+      --charcoal-dark: #3f3835;
+      --deep-dark: #242323;
+      --earth-brown: #5c5551;
+      --white: #ffffff;
+      --font-display: 'Khand', sans-serif;
+      --font-body: 'Prompt', sans-serif;
+      --font-script: 'Alex Brush', cursive;
+    }
+
+    /* ===== RESET & BASE ===== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: #f5f5f4;
+      color: var(--charcoal-dark);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    /* ===== PRINT STYLES ===== */
+    @media print {
+      body {
+        background: white;
+      }
+
+      .no-print {
+        display: none !important;
+      }
+
+      .page-break {
+        break-before: page;
+      }
+
+      .board-section {
+        box-shadow: none !important;
+        break-inside: avoid;
+      }
+
+      .brand-header {
+        background: var(--bg-dark) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .color-swatch {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+
+    /* ===== LAYOUT ===== */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ===== PRINT FAB ===== */
+    .print-fab {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      z-index: 100;
+      background: var(--primary);
+      color: white;
+      border: none;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(189, 168, 135, .4);
+      transition: transform .2s, box-shadow .2s;
+      font-size: 28px;
+    }
+
+    .print-fab:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(189, 168, 135, .5);
+    }
+
+    /* ===== HEADER ===== */
+    .brand-header {
+      background: var(--bg-dark);
+      padding: 64px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(189, 168, 135, .12) 0%, transparent 50%, rgba(189, 168, 135, .08) 100%);
+    }
+
+    .brand-header .logo-mark {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 16px;
+      filter: drop-shadow(0 4px 12px rgba(189, 168, 135, .3));
+    }
+
+    .brand-header h1 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 56px;
+      color: white;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      position: relative;
+    }
+
+    .brand-header .tagline {
+      font-family: var(--font-script);
+      color: var(--primary);
+      font-size: 32px;
+      margin-top: 8px;
+      position: relative;
+    }
+
+    .brand-header .subtitle {
+      font-family: var(--font-body);
+      font-weight: 300;
+      color: var(--slate-accent);
+      font-size: 14px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      margin-top: 24px;
+      position: relative;
+    }
+
+    /* ===== SECTIONS ===== */
+    .board-section {
+      background: white;
+      border-radius: 12px;
+      padding: 48px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .06);
+    }
+
+    .section-label {
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 32px;
+      text-transform: uppercase;
+      color: var(--bg-dark);
+      margin-bottom: 32px;
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 48px;
+      height: 3px;
+      background: var(--primary);
+      margin-top: 12px;
+    }
+
+    /* ===== COLOR PALETTE ===== */
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+    }
+
+    .color-swatch {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, .08);
+      transition: transform .2s;
+    }
+
+    .color-swatch:hover {
+      transform: translateY(-4px);
+    }
+
+    .swatch-color {
+      height: 120px;
+      display: flex;
+      align-items: flex-end;
+      padding: 12px;
+      position: relative;
+    }
+
+    .swatch-info {
+      padding: 16px;
+    }
+
+    .swatch-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .swatch-hex {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--slate-accent);
+      margin-top: 2px;
+    }
+
+    .swatch-rgb {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: #aaa;
+      margin-top: 2px;
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    .type-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 40px;
+      padding: 32px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .type-row:last-child {
+      border-bottom: none;
+    }
+
+    .type-meta {
+      flex: 0 0 200px;
+    }
+
+    .type-meta .font-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--charcoal-dark);
+    }
+
+    .type-meta .font-detail {
+      font-size: 12px;
+      color: var(--slate-accent);
+      margin-top: 4px;
+    }
+
+    .type-samples {
+      flex: 1;
+    }
+
+    /* ===== FONT SCALE ===== */
+    .scale-grid {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 16px 24px;
+      align-items: baseline;
+      margin-bottom: 24px;
+    }
+
+    .scale-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      color: var(--slate-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-align: right;
+      padding-top: 4px;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      border: none;
+      transition: all .25s;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+      padding: 16px 32px;
+      font-size: 16px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(189, 168, 135, .35);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      padding: 14px 30px;
+      font-size: 16px;
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-dark {
+      background: var(--bg-dark);
+      color: white;
+      padding: 16px 32px;
+      font-size: 16px;
+    }
+
+    .btn-dark:hover {
+      background: var(--charcoal-dark);
+    }
+
+    .btn-sm {
+      padding: 10px 20px;
+      font-size: 13px;
+    }
+
+    .btn-lg {
+      padding: 20px 48px;
+      font-size: 18px;
+    }
+
+    .btn-icon {
+      width: 48px;
+      height: 48px;
+      padding: 0;
+      border: 2px solid var(--slate-accent);
+      background: transparent;
+      color: var(--charcoal-dark);
+      font-size: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all .25s;
+    }
+
+    .btn-icon:hover {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: white;
+    }
+
+    /* ===== FORM ELEMENTS ===== */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--slate-accent);
+    }
+
+    .form-input {
+      background: var(--bg-dark);
+      border: 1px solid #444;
+      color: white;
+      padding: 14px 16px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      transition: border-color .2s;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .form-input::placeholder {
+      color: #777;
+    }
+
+    .form-input-light {
+      background: white;
+      border: 1px solid #ddd;
+      color: var(--charcoal-dark);
+      padding: 14px 16px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      transition: border-color .2s;
+    }
+
+    .form-input-light:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* SELECT / DROPDOWN */
+    .form-select {
+      appearance: none;
+      background: var(--bg-dark) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23bda887' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") no-repeat right 16px center;
+      border: 1px solid #444;
+      color: white;
+      padding: 14px 40px 14px 16px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      cursor: pointer;
+      transition: border-color .2s;
+    }
+
+    .form-select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .form-select-light {
+      appearance: none;
+      background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23bda887' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") no-repeat right 16px center;
+      border: 1px solid #ddd;
+      color: var(--charcoal-dark);
+      padding: 14px 40px 14px 16px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      cursor: pointer;
+      transition: border-color .2s;
+    }
+
+    .form-select-light:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* ===== CARDS ===== */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+
+    .card {
+      background: white;
+      padding: 32px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, .06);
+      border-top: 4px solid var(--primary);
+      transition: transform .2s;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+    }
+
+    .card-dark {
+      background: var(--bg-dark);
+      color: white;
+      padding: 32px;
+      border-top: 4px solid var(--primary);
+    }
+
+    .card-icon {
+      font-size: 36px;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 20px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .card-text {
+      font-size: 14px;
+      color: #888;
+      line-height: 1.7;
+    }
+
+    /* ===== HIGHLIGHT / ACCENT STYLES ===== */
+    .highlight-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      margin-bottom: 24px;
+    }
+
+    .highlight-box {
+      flex: 1;
+      min-width: 240px;
+      padding: 32px;
+      border-radius: 8px;
+    }
+
+    .hl-dark {
+      background: var(--bg-dark);
+    }
+
+    .hl-charcoal {
+      background: var(--charcoal-dark);
+    }
+
+    /* ===== ICON SHOWCASE ===== */
+    .icon-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      width: 80px;
+    }
+
+    .icon-item .material-icons {
+      font-size: 32px;
+      color: var(--primary);
+    }
+
+    .icon-item span:last-child {
+      font-size: 10px;
+      color: var(--slate-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+
+    /* ===== GRADIENT / OVERLAY ===== */
+    .gradient-strip {
+      height: 120px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-family: var(--font-display);
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* ===== SPACING & LAYOUT TOKENS ===== */
+    .token-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 16px;
+    }
+
+    .token-box {
+      text-align: center;
+      padding: 16px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+    }
+
+    .token-value {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 24px;
+      color: var(--bg-dark);
+    }
+
+    .token-label {
+      font-size: 11px;
+      color: var(--slate-accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 4px;
+    }
+
+    /* ===== DARK SECTION VARIANT ===== */
+    .board-section-dark {
+      background: var(--bg-dark);
+      color: white;
+      border-radius: 12px;
+      padding: 48px;
+      margin-bottom: 32px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, .2);
+    }
+
+    .board-section-dark .section-title {
+      color: white;
+    }
+
+    .board-section-dark .card-text {
+      color: #999;
+    }
+
+    /* ===== NAVBAR PREVIEW ===== */
+    .navbar-preview {
+      background: rgba(255, 255, 255, .85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e5e5e5;
+      padding: 0 24px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-radius: 8px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+    }
+
+    .nav-link {
+      font-family: var(--font-body);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: 600;
+      color: var(--charcoal-dark);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .nav-link:hover {
+      color: var(--primary);
+    }
+
+    /* ===== FOOTER PREVIEW ===== */
+    .footer-preview {
+      background: var(--bg-dark);
+      padding: 32px;
+      border-radius: 8px;
+      color: white;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      text-align: center;
+      color: var(--slate-accent);
+    }
+
+    /* ===== USAGE RULES ===== */
+    .do-dont {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .do-box,
+    .dont-box {
+      padding: 24px;
+      border-radius: 8px;
+    }
+
+    .do-box {
+      background: #f0faf0;
+      border-left: 4px solid #6b9;
+    }
+
+    .dont-box {
+      background: #fdf0f0;
+      border-left: 4px solid #c66;
+    }
+
+    .do-box h4 {
+      color: #4a8;
+      margin-bottom: 12px;
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .dont-box h4 {
+      color: #b55;
+      margin-bottom: 12px;
+      font-family: var(--font-display);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .do-box ul,
+    .dont-box ul {
+      font-size: 13px;
+      padding-left: 16px;
+    }
+
+    .do-box li,
+    .dont-box li {
+      margin-bottom: 6px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .brand-header h1 {
+        font-size: 36px;
+        letter-spacing: 0.15em;
+      }
+
+      .brand-header .tagline {
+        font-size: 24px;
+      }
+
+      .board-section,
+      .board-section-dark {
+        padding: 28px 20px;
+      }
+
+      .palette-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+
+      .swatch-color {
+        height: 80px;
+      }
+
+      .type-row {
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .type-meta {
+        flex: unset;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .do-dont {
+        grid-template-columns: 1fr;
+      }
+
+      .card-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .scale-grid {
+        grid-template-columns: 60px 1fr;
+        gap: 8px 16px;
+      }
+
+      .btn-grid {
+        gap: 12px;
+      }
+
+      .highlight-row {
+        flex-direction: column;
+      }
+
+      .navbar-preview {
+        flex-direction: column;
+        height: auto;
+        padding: 16px;
+        gap: 12px;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .container {
+        padding: 0 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PRINT BUTTON -->
+  <button class="print-fab no-print" onclick="window.print()" title="Print / Save as PDF">
+    <span class="material-icons">print</span>
+  </button>
+
+  <!-- ===== HEADER ===== -->
+  <header class="brand-header">
+    <div class="container" style="position:relative;">
+      <img src="assets/logo.svg" alt="Serenity Logo" class="logo-mark" />
+      <h1>Serenity</h1>
+      <div class="tagline">Luxury Condos</div>
+      <div class="subtitle">Brand Board — Moodboard &amp; Style Guide</div>
+      <div
+        style="font-family:var(--font-body);font-weight:300;font-size:13px;letter-spacing:0.3em;text-transform:uppercase;color:var(--primary);margin-top:20px;position:relative;">
+        www.SerenityLuxuryCondos.com</div>
+    </div>
+  </header>
+
+  <main class="container" style="padding-top:48px; padding-bottom:80px;">
+
+    <!-- ===== 1. COLOR PALETTE ===== -->
+    <section class="board-section">
+      <span class="section-label">01 — Identity</span>
+      <h2 class="section-title">Color Palette</h2>
+      <div class="palette-grid">
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#bda887;">
+            <span
+              style="color:white;font-family:var(--font-body);font-size:12px;font-weight:600;opacity:.8;">PRIMARY</span>
+          </div>
+          <div class="swatch-info">
+            <div class="swatch-name">Gold Primary</div>
+            <div class="swatch-hex">#BDA887</div>
+            <div class="swatch-rgb">RGB 189, 168, 135</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#242323;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Deep Dark</div>
+            <div class="swatch-hex">#242323</div>
+            <div class="swatch-rgb">RGB 36, 35, 35</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#3f3835;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Charcoal</div>
+            <div class="swatch-hex">#3F3835</div>
+            <div class="swatch-rgb">RGB 63, 56, 53</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#5c5551;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Earth Brown</div>
+            <div class="swatch-hex">#5C5551</div>
+            <div class="swatch-rgb">RGB 92, 85, 81</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#8e8c89;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Slate Accent</div>
+            <div class="swatch-hex">#8E8C89</div>
+            <div class="swatch-rgb">RGB 142, 140, 137</div>
+          </div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#d8d8d8;"></div>
+          <div class="swatch-info">
+            <div class="swatch-name">Light Background</div>
+            <div class="swatch-hex">#D8D8D8</div>
+            <div class="swatch-rgb">RGB 216, 216, 216</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 2. TYPOGRAPHY ===== -->
+    <section class="board-section">
+      <span class="section-label">02 — Typography</span>
+      <h2 class="section-title">Font Families</h2>
+
+      <!-- Khand -->
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="font-name">Khand</div>
+          <div class="font-detail">Display / Headings</div>
+          <div class="font-detail">Weight: 400, 700</div>
+          <div class="font-detail">Google Fonts</div>
+        </div>
+        <div class="type-samples">
+          <div
+            style="font-family:var(--font-display);font-weight:700;font-size:48px;text-transform:uppercase;line-height:1.1;color:var(--bg-dark);">
+            Serenity Luxury
+          </div>
+          <div
+            style="font-family:var(--font-display);font-weight:400;font-size:28px;text-transform:uppercase;letter-spacing:0.1em;color:var(--charcoal-dark);margin-top:8px;">
+            Who We Are
+          </div>
+          <div
+            style="font-family:var(--font-display);font-weight:700;font-size:16px;text-transform:uppercase;letter-spacing:0.2em;color:var(--slate-accent);margin-top:8px;">
+            ABCDEFGHIJKLMNOPQRSTUVWXYZ
+          </div>
+          <div
+            style="font-family:var(--font-display);font-weight:400;font-size:16px;color:var(--slate-accent);margin-top:4px;">
+            abcdefghijklmnopqrstuvwxyz 0123456789
+          </div>
+        </div>
+      </div>
+
+      <!-- Prompt -->
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="font-name">Prompt</div>
+          <div class="font-detail">Body / UI Text</div>
+          <div class="font-detail">Weight: 300, 400, 600</div>
+          <div class="font-detail">Google Fonts</div>
+        </div>
+        <div class="type-samples">
+          <div
+            style="font-family:var(--font-body);font-weight:300;font-size:20px;color:var(--charcoal-dark);line-height:1.7;">
+            Live in tranquility with luxury within the Mayan Jungle. Experience a new standard of living in the heart of
+            the Riviera Maya.
+          </div>
+          <div
+            style="font-family:var(--font-body);font-weight:400;font-size:14px;color:var(--slate-accent);margin-top:12px;">
+            Regular 400 — Our project offers an exclusive blend of modern elegance and natural serenity.
+          </div>
+          <div
+            style="font-family:var(--font-body);font-weight:600;font-size:14px;color:var(--charcoal-dark);margin-top:8px;">
+            Semibold 600 — Each residence is designed to be a private sanctuary.
+          </div>
+          <div
+            style="font-family:var(--font-body);font-weight:400;font-size:14px;color:var(--slate-accent);margin-top:8px;">
+            abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789
+          </div>
+        </div>
+      </div>
+
+      <!-- Alex Brush -->
+      <div class="type-row">
+        <div class="type-meta">
+          <div class="font-name">Alex Brush</div>
+          <div class="font-detail">Script / Accent</div>
+          <div class="font-detail">Weight: 400</div>
+          <div class="font-detail">Google Fonts</div>
+        </div>
+        <div class="type-samples">
+          <div style="font-family:var(--font-script);font-size:48px;color:var(--primary);line-height:1.2;">
+            Embrace Nature's Serenity
+          </div>
+          <div style="font-family:var(--font-script);font-size:32px;color:var(--charcoal-dark);margin-top:8px;">
+            Timeless Design
+          </div>
+          <div style="font-family:var(--font-script);font-size:24px;color:var(--slate-accent);margin-top:4px;">
+            abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3. FONT SCALE ===== -->
+    <section class="board-section">
+      <span class="section-label">03 — Scale</span>
+      <h2 class="section-title">Type Scale &amp; Hierarchy</h2>
+
+      <div class="scale-grid">
+        <div class="scale-label">H1 — 64px</div>
+        <div
+          style="font-family:var(--font-display);font-weight:700;font-size:64px;text-transform:uppercase;line-height:1;color:var(--bg-dark);">
+          Serenity</div>
+
+        <div class="scale-label">H2 — 48px</div>
+        <div
+          style="font-family:var(--font-display);font-weight:700;font-size:48px;text-transform:uppercase;line-height:1.1;color:var(--bg-dark);">
+          Who We Are</div>
+
+        <div class="scale-label">H3 — 32px</div>
+        <div
+          style="font-family:var(--font-display);font-weight:700;font-size:32px;text-transform:uppercase;line-height:1.2;color:var(--bg-dark);">
+          Prime Location</div>
+
+        <div class="scale-label">H4 — 24px</div>
+        <div
+          style="font-family:var(--font-display);font-weight:700;font-size:24px;text-transform:uppercase;line-height:1.3;color:var(--bg-dark);">
+          Inquiry Form</div>
+
+        <div class="scale-label">Script LG</div>
+        <div style="font-family:var(--font-script);font-size:48px;color:var(--primary);">Embrace Serenity</div>
+
+        <div class="scale-label">Script SM</div>
+        <div style="font-family:var(--font-script);font-size:32px;color:var(--primary);">Timeless Design</div>
+
+        <div class="scale-label">Body LG</div>
+        <div
+          style="font-family:var(--font-body);font-weight:300;font-size:20px;color:var(--charcoal-dark);line-height:1.7;">
+          Body large — light 300 weight for hero paragraphs</div>
+
+        <div class="scale-label">Body</div>
+        <div
+          style="font-family:var(--font-body);font-weight:400;font-size:16px;color:var(--charcoal-dark);line-height:1.6;">
+          Body regular — standard paragraph text at 16px</div>
+
+        <div class="scale-label">Body SM</div>
+        <div style="font-family:var(--font-body);font-weight:400;font-size:14px;color:var(--earth-brown);">Body small —
+          secondary text and descriptions</div>
+
+        <div class="scale-label">Label</div>
+        <div
+          style="font-family:var(--font-body);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:0.25em;color:var(--slate-accent);">
+          OUR PHILOSOPHY &nbsp;·&nbsp; TRACKING-WIDEST</div>
+
+        <div class="scale-label">Caption</div>
+        <div
+          style="font-family:var(--font-body);font-weight:400;font-size:12px;text-transform:uppercase;letter-spacing:0.15em;color:var(--slate-accent);">
+          Copyright © 2026 Serenity Luxury Condos</div>
+      </div>
+    </section>
+
+    <!-- ===== 4. TEXT HIGHLIGHTS ===== -->
+    <section class="board-section-dark">
+      <span class="section-label">04 — Emphasis</span>
+      <h2 class="section-title">Text Highlights &amp; Accents</h2>
+      <div class="highlight-row">
+        <div class="highlight-box hl-charcoal">
+          <div
+            style="font-family:var(--font-display);font-weight:700;font-size:36px;text-transform:uppercase;color:white;line-height:1.2;">
+            Live <span style="color:var(--primary);">Surrounded</span> By Nature
+          </div>
+          <div
+            style="font-size:12px;color:var(--slate-accent);margin-top:12px;text-transform:uppercase;letter-spacing:0.15em;">
+            Primary Accent Highlight</div>
+        </div>
+        <div class="highlight-box hl-charcoal">
+          <div style="font-family:var(--font-body);font-size:18px;color:#ccc;line-height:1.7;">
+            Welcome to <span style="color:var(--primary);font-weight:600;">Serenity Luxury Condos</span>, where we
+            redefine opulent living in the heart of Mexico.
+          </div>
+          <div
+            style="font-size:12px;color:var(--slate-accent);margin-top:12px;text-transform:uppercase;letter-spacing:0.15em;">
+            Inline Brand Highlight</div>
+        </div>
+      </div>
+      <div class="highlight-row">
+        <div class="highlight-box hl-charcoal">
+          <span
+            style="display:block;font-family:var(--font-display);font-weight:700;font-size:48px;color:var(--primary);">120+</span>
+          <span style="font-size:11px;text-transform:uppercase;letter-spacing:0.2em;color:var(--slate-accent);">Premium
+            Units</span>
+          <div
+            style="font-size:12px;color:var(--slate-accent);margin-top:16px;text-transform:uppercase;letter-spacing:0.15em;">
+            Stat Counter Style</div>
+        </div>
+        <div class="highlight-box hl-charcoal">
+          <span
+            style="font-family:var(--font-display);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:0.3em;color:var(--primary);display:block;margin-bottom:8px;">Our
+            Philosophy</span>
+          <span
+            style="font-family:var(--font-display);font-weight:700;font-size:32px;text-transform:uppercase;color:white;">Section
+            Heading</span>
+          <div
+            style="font-size:12px;color:var(--slate-accent);margin-top:16px;text-transform:uppercase;letter-spacing:0.15em;">
+            Label + Heading Pattern</div>
+        </div>
+        <div class="highlight-box hl-charcoal">
+          <div style="font-family:var(--font-script);font-size:36px;color:var(--primary);">Timeless Design</div>
+          <div
+            style="font-size:12px;color:var(--slate-accent);margin-top:16px;text-transform:uppercase;letter-spacing:0.15em;">
+            Script Accent Tag</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. BUTTONS ===== -->
+    <section class="board-section">
+      <span class="section-label">05 — Interactive</span>
+      <h2 class="section-title">Buttons</h2>
+
+      <h3
+        style="font-family:var(--font-display);font-size:14px;text-transform:uppercase;letter-spacing:0.15em;color:var(--slate-accent);margin-bottom:16px;">
+        Primary Buttons</h3>
+      <div class="btn-grid" style="margin-bottom:32px;">
+        <button class="btn btn-primary btn-lg">Explore More</button>
+        <button class="btn btn-primary">Book a Tour</button>
+        <button class="btn btn-primary btn-sm">Send Inquiry</button>
+      </div>
+
+      <h3
+        style="font-family:var(--font-display);font-size:14px;text-transform:uppercase;letter-spacing:0.15em;color:var(--slate-accent);margin-bottom:16px;">
+        Secondary / Outline Buttons</h3>
+      <div class="btn-grid" style="margin-bottom:32px;">
+        <button class="btn btn-secondary btn-lg">Learn More</button>
+        <button class="btn btn-secondary">View Gallery</button>
+        <button class="btn btn-secondary btn-sm">Details</button>
+      </div>
+
+      <h3
+        style="font-family:var(--font-display);font-size:14px;text-transform:uppercase;letter-spacing:0.15em;color:var(--slate-accent);margin-bottom:16px;">
+        Dark / Icon Buttons</h3>
+      <div class="btn-grid">
+        <button class="btn btn-dark">Contact Us</button>
+        <button class="btn btn-dark btn-sm">Get Started</button>
+        <button class="btn-icon"><span class="material-icons">phone</span></button>
+        <button class="btn-icon"><span class="material-icons">email</span></button>
+        <button class="btn-icon"><span class="material-icons">location_on</span></button>
+        <button class="btn-icon"><span class="material-icons">share</span></button>
+      </div>
+    </section>
+
+    <!-- ===== 6. FORM ELEMENTS ===== -->
+    <section class="board-section-dark">
+      <span class="section-label">06 — Forms</span>
+      <h2 class="section-title">Form Elements &amp; Inputs</h2>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;">
+        <!-- Dark variant -->
+        <div>
+          <h3
+            style="font-family:var(--font-display);font-size:14px;text-transform:uppercase;letter-spacing:0.15em;color:var(--slate-accent);margin-bottom:20px;">
+            Dark Theme Inputs</h3>
+          <div class="form-grid">
+            <div class="form-field">
+              <label class="form-label">First Name</label>
+              <input type="text" class="form-input" placeholder="John" />
+            </div>
+            <div class="form-field">
+              <label class="form-label">Last Name</label>
+              <input type="text" class="form-input" placeholder="Doe" />
+            </div>
+          </div>
+          <div class="form-field" style="margin-top:16px;">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-input" placeholder="john@example.com" />
+          </div>
+          <div class="form-field" style="margin-top:16px;">
+            <label class="form-label">Residence Type</label>
+            <select class="form-select" style="width:100%;">
+              <option>Select an option...</option>
+              <option>Studio Suite</option>
+              <option>1 Bedroom</option>
+              <option>2 Bedroom</option>
+              <option>Penthouse</option>
+            </select>
+          </div>
+          <div class="form-field" style="margin-top:16px;">
+            <label class="form-label">Your Message</label>
+            <textarea class="form-input" rows="3" placeholder="Tell us about your interest..."></textarea>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:20px;">Send Inquiry</button>
+        </div>
+        <!-- Light variant -->
+        <div style="background:white;padding:32px;border-radius:8px;">
+          <h3
+            style="font-family:var(--font-display);font-size:14px;text-transform:uppercase;letter-spacing:0.15em;color:var(--slate-accent);margin-bottom:20px;">
+            Light Theme Inputs</h3>
+          <div class="form-grid">
+            <div class="form-field">
+              <label class="form-label" style="color:var(--charcoal-dark);">First Name</label>
+              <input type="text" class="form-input-light" placeholder="John" />
+            </div>
+            <div class="form-field">
+              <label class="form-label" style="color:var(--charcoal-dark);">Last Name</label>
+              <input type="text" class="form-input-light" placeholder="Doe" />
+            </div>
+          </div>
+          <div class="form-field" style="margin-top:16px;">
+            <label class="form-label" style="color:var(--charcoal-dark);">Email Address</label>
+            <input type="email" class="form-input-light" placeholder="john@example.com" />
+          </div>
+          <div class="form-field" style="margin-top:16px;">
+            <label class="form-label" style="color:var(--charcoal-dark);">Residence Type</label>
+            <select class="form-select-light" style="width:100%;">
+              <option>Select an option...</option>
+              <option>Studio Suite</option>
+              <option>1 Bedroom</option>
+              <option>2 Bedroom</option>
+              <option>Penthouse</option>
+            </select>
+          </div>
+          <div class="form-field" style="margin-top:16px;">
+            <label class="form-label" style="color:var(--charcoal-dark);">Your Message</label>
+            <textarea class="form-input-light" rows="3" placeholder="Tell us about your interest..."></textarea>
+          </div>
+          <button class="btn btn-primary" style="width:100%;margin-top:20px;">Send Inquiry</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 7. CARDS ===== -->
+    <section class="board-section">
+      <span class="section-label">07 — Components</span>
+      <h2 class="section-title">Cards</h2>
+
+      <h3
+        style="font-family:var(--font-display);font-size:14px;text-transform:uppercase;letter-spacing:0.15em;color:var(--slate-accent);margin-bottom:20px;">
+        Light Theme Cards</h3>
+      <div class="card-grid" style="margin-bottom:40px;">
+        <div class="card">
+          <span class="material-icons card-icon">location_on</span>
+          <div class="card-title">Prime Location</div>
+          <div class="card-text">Located in Isla Mujeres and Isla Blanca, our residences feature stunning architecture
+            and world-class proximity to the Caribbean sea.</div>
+        </div>
+        <div class="card">
+          <span class="material-icons card-icon">eco</span>
+          <div class="card-title">Eco-Conscious</div>
+          <div class="card-text">Designed with sustainability at its core, Serenity preserves the surrounding Mayan
+            jungle while providing unparalleled luxury.</div>
+        </div>
+        <div class="card">
+          <span class="material-icons card-icon">invest</span>
+          <div class="card-title">Smart Investment</div>
+          <div class="card-text">Whether you're seeking a vacation retreat or a smart investment opportunity, Serenity
+            provides security and appreciation.</div>
+        </div>
+      </div>
+
+      <h3
+        style="font-family:var(--font-display);font-size:14px;text-transform:uppercase;letter-spacing:0.15em;color:var(--slate-accent);margin-bottom:20px;">
+        Dark Theme Cards</h3>
+      <div class="card-grid">
+        <div class="card-dark">
+          <span class="material-icons card-icon">phone</span>
+          <div class="card-title">Call Us</div>
+          <div class="card-text">+1 209-689-1052</div>
+        </div>
+        <div class="card-dark">
+          <span class="material-icons card-icon">email</span>
+          <div class="card-title">Email Us</div>
+          <div class="card-text">info@serenityluxurycondos.com</div>
+        </div>
+        <div class="card-dark">
+          <span class="material-icons card-icon">location_on</span>
+          <div class="card-title">Visit Us</div>
+          <div class="card-text">Cancun, Quintana Roo, Mexico</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 8. ICONS ===== -->
+    <section class="board-section">
+      <span class="section-label">08 — Iconography</span>
+      <h2 class="section-title">Material Icons</h2>
+      <p style="font-size:14px;color:var(--slate-accent);margin-bottom:24px;">Google Material Icons — used across the
+        site for UI elements and feature cards.</p>
+      <div class="icon-grid">
+        <div class="icon-item"><span class="material-icons">location_on</span><span>Location</span></div>
+        <div class="icon-item"><span class="material-icons">phone</span><span>Phone</span></div>
+        <div class="icon-item"><span class="material-icons">email</span><span>Email</span></div>
+        <div class="icon-item"><span class="material-icons">eco</span><span>Eco</span></div>
+        <div class="icon-item"><span class="material-icons">invest</span><span>Invest</span></div>
+        <div class="icon-item"><span class="material-icons">expand_more</span><span>Expand</span></div>
+        <div class="icon-item"><span class="material-icons">arrow_forward</span><span>Arrow</span></div>
+        <div class="icon-item"><span class="material-icons">close</span><span>Close</span></div>
+        <div class="icon-item"><span class="material-icons">menu</span><span>Menu</span></div>
+        <div class="icon-item"><span class="material-icons">photo_library</span><span>Gallery</span></div>
+        <div class="icon-item"><span class="material-icons">pool</span><span>Pool</span></div>
+        <div class="icon-item"><span class="material-icons">spa</span><span>Spa</span></div>
+        <div class="icon-item"><span class="material-icons">fitness_center</span><span>Fitness</span></div>
+        <div class="icon-item"><span class="material-icons">restaurant</span><span>Dining</span></div>
+      </div>
+    </section>
+
+    <!-- ===== 9. GRADIENTS & OVERLAYS ===== -->
+    <section class="board-section">
+      <span class="section-label">09 — Effects</span>
+      <h2 class="section-title">Gradients &amp; Overlays</h2>
+      <div style="display:grid;gap:20px;">
+        <div class="gradient-strip"
+          style="background:linear-gradient(to bottom, rgba(36,35,35,0.4), rgba(36,35,35,0.8));">
+          Hero Gradient Overlay — rgba(36,35,35, 0.4 → 0.8)
+        </div>
+        <div class="gradient-strip" style="background:rgba(36,35,35,0.9);backdrop-filter:blur(10px);">
+          Overlay Card — rgba(36,35,35, 0.9) + blur(10px)
+        </div>
+        <div class="gradient-strip"
+          style="background:linear-gradient(135deg, var(--primary) 0%, var(--charcoal-dark) 100%);">
+          Brand Gradient — Primary Gold → Charcoal
+        </div>
+        <div class="gradient-strip"
+          style="background:linear-gradient(135deg, var(--bg-dark) 0%, var(--charcoal-dark) 50%, var(--earth-brown) 100%);">
+          Dark Range — Deep Dark → Charcoal → Earth
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 10. NAVBAR PREVIEW ===== -->
+    <section class="board-section">
+      <span class="section-label">10 — Navigation</span>
+      <h2 class="section-title">Navbar &amp; Footer</h2>
+
+      <h3
+        style="font-family:var(--font-display);font-size:14px;text-transform:uppercase;letter-spacing:0.15em;color:var(--slate-accent);margin-bottom:16px;">
+        Navigation Bar</h3>
+      <div class="navbar-preview" style="margin-bottom:32px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <img src="assets/logo.svg" alt="Logo" style="height:32px;filter:invert(1);" />
+          <span
+            style="font-family:var(--font-display);font-weight:700;font-size:20px;text-transform:uppercase;letter-spacing:0.2em;">Serenity</span>
+        </div>
+        <div class="nav-links">
+          <a href="#" class="nav-link">Home</a>
+          <a href="#" class="nav-link">About</a>
+          <a href="#" class="nav-link">Amenities</a>
+          <a href="#" class="nav-link">Residences</a>
+          <a href="#" class="nav-link">Inquiry</a>
+        </div>
+        <button class="btn btn-primary btn-sm">Book a Tour</button>
+      </div>
+
+      <h3
+        style="font-family:var(--font-display);font-size:14px;text-transform:uppercase;letter-spacing:0.15em;color:var(--slate-accent);margin-bottom:16px;">
+        Footer</h3>
+      <div class="footer-preview">
+        Copyright © 2026 Serenity Luxury Condos. All Rights Reserved.
+      </div>
+    </section>
+
+    <!-- ===== 11. SPACING TOKENS ===== -->
+    <section class="board-section">
+      <span class="section-label">11 — Tokens</span>
+      <h2 class="section-title">Spacing &amp; Layout</h2>
+      <div class="token-grid">
+        <div class="token-box">
+          <div class="token-value">6px</div>
+          <div class="token-label">px-6 / Gap XS</div>
+        </div>
+        <div class="token-box">
+          <div class="token-value">12px</div>
+          <div class="token-label">Gap SM</div>
+        </div>
+        <div class="token-box">
+          <div class="token-value">16px</div>
+          <div class="token-label">Gap MD</div>
+        </div>
+        <div class="token-box">
+          <div class="token-value">24px</div>
+          <div class="token-label">Section Gap</div>
+        </div>
+        <div class="token-box">
+          <div class="token-value">48px</div>
+          <div class="token-label">Section Pad</div>
+        </div>
+        <div class="token-box">
+          <div class="token-value">96px</div>
+          <div class="token-label">py-24</div>
+        </div>
+        <div class="token-box">
+          <div class="token-value">1200px</div>
+          <div class="token-label">Max Width</div>
+        </div>
+        <div class="token-box">
+          <div class="token-value">72px</div>
+          <div class="token-label">Navbar H</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 12. DO / DON'T ===== -->
+    <section class="board-section">
+      <span class="section-label">12 — Guidelines</span>
+      <h2 class="section-title">Brand Usage Rules</h2>
+      <div class="do-dont">
+        <div class="do-box">
+          <h4>✓ Do</h4>
+          <ul>
+            <li>Use Khand Bold for all headings, always uppercase</li>
+            <li>Use Alex Brush for elegant accent phrases only</li>
+            <li>Keep body text in Prompt at 300–600 weight</li>
+            <li>Maintain wide letter-spacing on labels (0.15em–0.3em)</li>
+            <li>Use the gold primary (#BDA887) sparingly for accents</li>
+            <li>Pair dark backgrounds with light text</li>
+            <li>Use border-top 4px primary on cards</li>
+            <li>Maintain generous whitespace between sections</li>
+          </ul>
+        </div>
+        <div class="dont-box">
+          <h4>✗ Don't</h4>
+          <ul>
+            <li>Don't use Alex Brush for body copy or long text</li>
+            <li>Don't apply colors outside the defined palette</li>
+            <li>Don't use lowercase for Khand display headings</li>
+            <li>Don't reduce letter-spacing on navigation links</li>
+            <li>Don't use rounded corners on primary buttons</li>
+            <li>Don't pair gold text on light backgrounds without contrast</li>
+            <li>Don't use more than 2 font weights on a single card</li>
+            <li>Don't skip the label pattern above section headings</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 13. LOGO USAGE ===== -->
+    <section class="board-section-dark page-break">
+      <span class="section-label">13 — Logo</span>
+      <h2 class="section-title">Logo Usage</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));gap:32px;">
+        <div style="background:var(--charcoal-dark);padding:48px;border-radius:8px;text-align:center;">
+          <img src="assets/logo.svg" alt="Logo White" style="height:80px;margin-bottom:16px;" />
+          <div
+            style="font-family:var(--font-display);font-weight:700;font-size:24px;text-transform:uppercase;letter-spacing:0.2em;">
+            Serenity</div>
+          <div
+            style="font-size:11px;color:var(--slate-accent);margin-top:12px;text-transform:uppercase;letter-spacing:0.15em;">
+            White on Dark — Primary</div>
+        </div>
+        <div style="background:white;padding:48px;border-radius:8px;text-align:center;">
+          <img src="assets/logo.svg" alt="Logo Dark" style="height:80px;margin-bottom:16px;filter:invert(1);" />
+          <div
+            style="font-family:var(--font-display);font-weight:700;font-size:24px;text-transform:uppercase;letter-spacing:0.2em;color:var(--bg-dark);">
+            Serenity</div>
+          <div
+            style="font-size:11px;color:var(--slate-accent);margin-top:12px;text-transform:uppercase;letter-spacing:0.15em;">
+            Dark on Light — Alternate</div>
+        </div>
+        <div style="background:var(--primary);padding:48px;border-radius:8px;text-align:center;">
+          <img src="assets/logo.svg" alt="Logo Gold" style="height:80px;margin-bottom:16px;" />
+          <div
+            style="font-family:var(--font-display);font-weight:700;font-size:24px;text-transform:uppercase;letter-spacing:0.2em;color:white;">
+            Serenity</div>
+          <div
+            style="font-size:11px;color:rgba(255,255,255,.6);margin-top:12px;text-transform:uppercase;letter-spacing:0.15em;">
+            White on Primary — Accent</div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer style="background:var(--bg-dark);padding:24px;text-align:center;">
+    <p
+      style="font-family:var(--font-body);font-size:11px;color:var(--slate-accent);text-transform:uppercase;letter-spacing:0.15em;">
+      Serenity Luxury Condos — Brand Board — Confidential
+    </p>
+  </footer>
+
+</body>
+
+</html>

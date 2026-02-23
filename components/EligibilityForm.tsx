@@ -3,13 +3,13 @@ import { ArrowUpRight } from 'lucide-react';
 
 const EligibilityForm: React.FC = () => {
     return (
-        <section id="eligibility" className="py-24 px-4 bg-white">
+        <section id="eligibility" className="py-24 px-4 bg-[#f4f2ee]">
             <div className="max-w-4xl mx-auto text-center">
                 <h2 className="text-4xl lg:text-5xl font-black text-navy mb-12 uppercase tracking-tighter">
                     You May Be <br className="md:hidden" /> Eligible!
                 </h2>
 
-                <form className="bg-[#f8fafc] p-8 md:p-12 rounded-[40px] border border-slate-100 shadow-xl shadow-slate-200/50">
+                <form className="bg-[#f4f2ee] p-8 md:p-12 rounded-[40px] border border-slate-100 shadow-xl shadow-slate-200/50">
                     <div className="grid md:grid-cols-2 gap-6 mb-8">
                         <div className="space-y-2 text-left">
                             <label htmlFor="name" className="text-sm font-bold text-navy uppercase tracking-wider ml-4">Full Name</label>

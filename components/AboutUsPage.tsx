@@ -28,22 +28,24 @@ const AboutUsPage: React.FC = () => {
 
                     {/* Origin Story */}
                     <div className="bg-white p-8 md:p-12 rounded-[32px] shadow-sm border border-slate-100">
-                        <div className="flex items-center gap-4 mb-8">
-                            <div className="w-12 h-12 bg-mint/20 rounded-2xl flex items-center justify-center text-mint">
-                                <Calendar size={24} strokeWidth={2.5} />
-                            </div>
-                            <h2 className="text-3xl font-black text-navy tracking-tight">Thinking Back to 2015</h2>
-                        </div>
                         <div className="flex flex-col md:flex-row gap-8 items-start">
-                            <div className="prose prose-lg text-slate-600 flex-1">
-                                <p className="mb-6">
-                                    At Friendly Care Agency, our journey began right in the heart of Quantez's childhood home. When Quantez’s beloved uncle, Joseph “Joe” Stephens, suffered a stroke, the family faced a daunting challenge.
-                                </p>
-                                <p>
-                                    With his mother working long hours to provide for their family, they struggled to find a reliable caregiver who could offer Joe the attention and compassion he needed. The heartbreaking reality of having to admit him to a nursing home was a wake-up call for Quantez. He witnessed firsthand the struggles families face when proper care is out of reach, and he felt a burning desire to make a difference.
-                                </p>
+                            <div className="flex-1">
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="w-12 h-12 bg-mint/20 rounded-2xl flex items-center justify-center text-mint">
+                                        <Calendar size={24} strokeWidth={2.5} />
+                                    </div>
+                                    <h2 className="text-3xl font-black text-navy tracking-tight">Thinking Back to 2015</h2>
+                                </div>
+                                <div className="prose prose-lg text-slate-600">
+                                    <p className="mb-6">
+                                        At Friendly Care Agency, our journey began right in the heart of Quantez's childhood home. When Quantez's beloved uncle, Joseph "Joe" Stephens, suffered a stroke, the family faced a daunting challenge.
+                                    </p>
+                                    <p>
+                                        With his mother working long hours to provide for their family, they struggled to find a reliable caregiver who could offer Joe the attention and compassion he needed. The heartbreaking reality of having to admit him to a nursing home was a wake-up call for Quantez. He witnessed firsthand the struggles families face when proper care is out of reach, and he felt a burning desire to make a difference.
+                                    </p>
+                                </div>
                             </div>
-                            <div className="w-full md:w-1/3 shrink-0">
+                            <div className="w-full md:w-1/2 shrink-0">
                                 <div className="rounded-[24px] overflow-hidden border-[6px] border-slate-100 shadow-lg">
                                     <img
                                         src="/uncle-joe.png"
@@ -72,7 +74,7 @@ const AboutUsPage: React.FC = () => {
                             <Users className="text-navy mb-6" size={32} strokeWidth={2.5} />
                             <h3 className="text-2xl font-black mb-4 tracking-tight">Growing Together</h3>
                             <p className="text-navy/80 font-medium leading-relaxed">
-                                From those humble beginnings in a living room, we have grown into a dedicated team of professionals who share Quantez’s passion. We believe that everyone deserves to be treated with dignity, respect, and kindness.
+                                From those humble beginnings in a living room, we have grown into a dedicated team of professionals who share Quantez's passion. We believe that everyone deserves to be treated with dignity, respect, and kindness.
                             </p>
                         </div>
                     </div>

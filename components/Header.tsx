@@ -45,9 +45,9 @@ const Header: React.FC = () => {
 
       {/* User Actions */}
       <div className="flex items-center gap-2 h-full">
-        <button className="w-20 h-full flex items-center justify-center bg-mint rounded-[24px] text-navy hover:brightness-95 transition-all">
+        <Link to="/role-selection" className="w-20 h-full flex items-center justify-center bg-mint rounded-[24px] text-navy hover:brightness-95 transition-all">
           <User size={24} strokeWidth={2.5} />
-        </button>
+        </Link>
         <a href="tel:4789734831" className="px-10 h-full bg-mint rounded-[24px] text-navy font-black uppercase text-xs tracking-[0.2em] hover:brightness-95 transition-all whitespace-nowrap flex items-center">
           Call Today
         </a>

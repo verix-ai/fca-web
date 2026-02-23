@@ -10,7 +10,7 @@ const Team: React.FC = () => {
   ];
 
   return (
-    <section id="team" className="py-24 px-4 bg-[#f8fafc]">
+    <section id="team" className="py-24 px-4 bg-[#f4f2ee] rounded-3xl">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
           <div className="space-y-4">

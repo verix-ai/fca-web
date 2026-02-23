@@ -5,6 +5,8 @@ import Header from './components/Header';
 import Home from './components/Home';
 import AboutUsPage from './components/AboutUsPage';
 import StaffPage from './components/StaffPage';
+import RoleSelectionPage from './components/RoleSelectionPage';
+import ComingSoonPage from './components/ComingSoonPage';
 import Footer from './components/Footer';
 
 const App: React.FC = () => {
@@ -36,6 +38,9 @@ const App: React.FC = () => {
           <Route path="/" element={<Home />} />
           <Route path="/about-us" element={<AboutUsPage />} />
           <Route path="/staff" element={<StaffPage />} />
+          <Route path="/role-selection" element={<RoleSelectionPage />} />
+          <Route path="/caregiver-login" element={<ComingSoonPage title="Caregiver Sign-In Coming Soon" />} />
+          <Route path="/client-login" element={<ComingSoonPage title="Client Sign-In Coming Soon" />} />
         </Routes>
       </main>
 
