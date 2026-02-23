@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, Phone, Menu } from 'lucide-react';
+import { User, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
@@ -52,9 +52,6 @@ const Header: React.FC = () => {
           <Phone size={22} className="md:hidden" strokeWidth={2.5} />
           <span className="hidden md:inline">Call Today</span>
         </a>
-        <button className="md:hidden w-14 h-full flex items-center justify-center bg-[#f4f2ee] border-2 border-black/5 rounded-[24px] text-navy hover:brightness-95 transition-all">
-          <Menu size={24} strokeWidth={2.5} />
-        </button>
       </div>
     </header>
   );
