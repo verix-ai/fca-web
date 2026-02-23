@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, Heart } from 'lucide-react';
+import { User, Phone, Menu } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
@@ -48,9 +48,13 @@ const Header: React.FC = () => {
         <Link to="/role-selection" className="w-14 md:w-20 h-full flex items-center justify-center bg-mint rounded-[24px] text-navy hover:brightness-95 transition-all">
           <User size={24} strokeWidth={2.5} />
         </Link>
-        <a href="tel:4789734831" className="px-4 md:px-10 h-full bg-mint rounded-[24px] text-navy font-black uppercase text-[10px] md:text-xs tracking-[0.2em] hover:brightness-95 transition-all whitespace-nowrap flex items-center">
-          Call Today
+        <a href="tel:4789734831" className="w-14 md:w-auto md:px-10 h-full bg-mint rounded-[24px] text-navy font-black uppercase text-[10px] md:text-xs tracking-[0.2em] hover:brightness-95 transition-all whitespace-nowrap flex items-center justify-center">
+          <Phone size={22} className="md:hidden" strokeWidth={2.5} />
+          <span className="hidden md:inline">Call Today</span>
         </a>
+        <button className="md:hidden w-14 h-full flex items-center justify-center bg-[#f4f2ee] border-2 border-black/5 rounded-[24px] text-navy hover:brightness-95 transition-all">
+          <Menu size={24} strokeWidth={2.5} />
+        </button>
       </div>
     </header>
   );
