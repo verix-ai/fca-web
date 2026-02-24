@@ -12,20 +12,20 @@ const Team: React.FC = () => {
   return (
     <section id="team" className="py-24 px-4 bg-[#f4f2ee] rounded-3xl">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-end text-center md:text-left mb-16 gap-6">
           <div className="space-y-4">
-            <h2 className="text-4xl lg:text-6xl font-black text-navy leading-tight uppercase tracking-tighter">
+            <h2 className="text-5xl lg:text-6xl font-black text-navy leading-[0.9] uppercase tracking-tighter">
               MEET OUR <br /> TEAM
             </h2>
           </div>
-          <Link to="/staff">
+          <Link to="/staff" className="hidden md:block">
             <button className="px-8 py-4 bg-mint text-navy rounded-2xl font-bold uppercase tracking-widest hover:brightness-95 transition-all shadow-lg hover:shadow-xl">
               View All Team
             </button>
           </Link>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12 md:mb-0">
           {teamMembers.map((member, i) => (
             <div key={i} className="group bg-white rounded-[40px] p-4 border border-slate-100 hover:shadow-2xl hover:shadow-slate-200/50 transition-all duration-500">
               <div className="relative rounded-[32px] overflow-hidden aspect-[4/5] mb-6 bg-slate-100">
@@ -44,6 +44,14 @@ const Team: React.FC = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="flex justify-center md:hidden">
+          <Link to="/staff">
+            <button className="px-8 py-4 bg-mint text-navy rounded-2xl font-bold uppercase tracking-widest hover:brightness-95 transition-all shadow-lg hover:shadow-xl">
+              View All Team
+            </button>
+          </Link>
         </div>
       </div>
     </section>
