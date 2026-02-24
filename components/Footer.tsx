@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
 
         <div className="pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
           <p className="text-[10px] font-bold text-slate-600 uppercase tracking-[0.2em] text-center md:text-left">
-            © 2024 Friendly Care Agency. <br className="md:hidden" /> Crafted with Modern Excellence.
+            © 2024 Friendly Care Agency. <br className="md:hidden" /> Crafted with Excellence By <a href="https://www.verix.ai" target="_blank" rel="noopener noreferrer" className="text-mint hover:underline">Verix AI</a>.
           </p>
 
           <div className="flex gap-6">
