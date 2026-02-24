@@ -14,6 +14,7 @@ const Footer: React.FC = () => {
 
           <nav className="flex flex-col md:flex-row flex-wrap justify-center items-center gap-6 md:gap-12 text-[11px] font-black uppercase tracking-[0.3em] text-slate-500">
             <Link to="/staff" className="hover:text-mint transition-colors">Specialists</Link>
+            <Link to="/faq" className="hover:text-mint transition-colors">FAQ</Link>
             <Link to="/privacy-policy" className="hover:text-mint transition-colors">Privacy Policy</Link>
             <Link to="/contact-us" className="hover:text-mint transition-colors">Contact Us</Link>
           </nav>

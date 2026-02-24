@@ -9,6 +9,7 @@ import RoleSelectionPage from './components/RoleSelectionPage';
 import ComingSoonPage from './components/ComingSoonPage';
 import PrivacyPolicyPage from './components/PrivacyPolicyPage';
 import ContactUsPage from './components/ContactUsPage';
+import FAQPage from './components/FAQPage';
 import Footer from './components/Footer';
 
 const App: React.FC = () => {
@@ -43,6 +44,7 @@ const App: React.FC = () => {
           <Route path="/role-selection" element={<RoleSelectionPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
+          <Route path="/faq" element={<FAQPage />} />
           <Route path="/caregiver-login" element={<ComingSoonPage title="Caregiver Sign-In Coming Soon" />} />
           <Route path="/client-login" element={<ComingSoonPage title="Client Sign-In Coming Soon" />} />
         </Routes>
