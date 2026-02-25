@@ -40,7 +40,7 @@ const WhyChooseUs: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 w-full">
           {features.map((f, i) => (
-            <div key={i} className="glass-card p-10 rounded-[32px] text-left flex flex-col justify-center min-h-[250px] transition-all hover:bg-white/20">
+            <div key={i} className="glass-card p-10 rounded-[32px] text-left flex flex-col justify-start min-h-[250px] transition-all hover:bg-white/20">
               <h4 className="text-white font-black text-xl mb-4 tracking-tighter uppercase">{f.title}</h4>
               <p className="text-white/60 text-xs font-bold leading-relaxed tracking-wider">{f.desc}</p>
             </div>

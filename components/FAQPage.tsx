@@ -11,7 +11,15 @@ const FAQPage: React.FC = () => {
             questions: [
                 {
                     q: "How much will I get paid?",
-                    a: "Payment and benefits depend on the patient’s location and insurance plan. Please call us to find out your exact rates."
+                    a: (
+                        <>
+                            Payment is based on your location. Please call us to find out your rates. (
+                            <a href="tel:4789734831" className="text-mint hover:text-navy transition-colors font-bold underline">
+                                Call Us Now
+                            </a>
+                            )
+                        </>
+                    )
                 },
                 {
                     q: "How often will I get paid?",
@@ -43,7 +51,7 @@ const FAQPage: React.FC = () => {
             questions: [
                 {
                     q: "Does Friendly Care Agency participate in Georgia Medicaid Waiver programs?",
-                    a: "Yes, we work with Structured Family Caregiving (SFC) and other state-approved waiver programs to help families receive financial assistance for providing home care."
+                    a: "Yes, we particpate in the Source, CCSP, GAPP and ICWP waiver programs."
                 },
                 {
                     q: "Do I need special training to be a family caregiver in Georgia?",

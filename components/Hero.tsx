@@ -10,22 +10,22 @@ const Hero: React.FC = () => {
 
 
       {/* Top Typography (Background Layer) */}
-      <div className="w-full text-center z-0 mt-8">
-        <p className="text-xs md:text-xl lg:text-2xl font-bold text-mint uppercase tracking-widest mb-4">
+      <div className="w-full text-center z-0 -mt-12 md:mt-8 overflow-hidden">
+        <h1 className="text-[3.9vw] sm:text-sm md:text-xl lg:text-2xl font-bold text-mint uppercase tracking-[0.05em] md:tracking-widest mb-4 whitespace-nowrap">
           Get Paid To Care Of Your Loved Ones
-        </p>
-        <h1 className="text-[12vw] md:text-[9vw] font-black text-navy leading-[0.8] tracking-tighter uppercase select-none whitespace-nowrap">
-          YOUR HEALTH,
         </h1>
+        <h2 className="text-[12vw] md:text-[9vw] font-black text-navy leading-[0.8] tracking-tighter uppercase select-none whitespace-nowrap">
+          YOUR HEALTH,
+        </h2>
       </div>
 
       {/* Doctor Image Container (Middle Layer) */}
       <div className="relative z-10 w-full max-w-2xl -mt-16 flex justify-center">
         <div className="relative">
           <img
-            src="/hero-nurse.png"
-            alt="Smiling Nurse"
-            className="h-auto max-h-[50vh] w-auto object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.15)] rounded-b-full scale-100"
+            src="/care-hero.png"
+            alt="Caregiver and Grandma"
+            className="h-auto max-h-[50vh] w-auto object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.15)] rounded-b-full scale-100 lg:scale-110 origin-bottom"
           />
           {/* Subtle glow behind doctor */}
           <div className="absolute inset-0 bg-mint/10 rounded-full blur-[100px] -z-10"></div>
@@ -34,9 +34,9 @@ const Hero: React.FC = () => {
 
       {/* Bottom Typography (Foreground Layer) */}
       <div className="absolute bottom-[28%] w-full text-center z-20 pointer-events-none">
-        <h1 className="text-[12vw] md:text-[9vw] font-black text-navy leading-[0.8] tracking-tighter uppercase select-none whitespace-nowrap">
+        <h2 className="text-[12vw] md:text-[9vw] font-black text-navy leading-[0.8] tracking-tighter uppercase select-none whitespace-nowrap">
           OUR PRIORITY
-        </h1>
+        </h2>
       </div>
 
       {/* Bottom Controls Area */}

@@ -12,14 +12,12 @@ const About: React.FC = () => {
             <div className="inline-block px-5 py-2 bg-white border border-black/5 rounded-full text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
               About us
             </div>
-            <h2 className="text-6xl md:text-8xl font-black text-navy leading-[0.85] tracking-tighter uppercase">
-              COMMITTED TO <br />
-              YOUR HEALTH <br />
-              AND WELLNESS
+            <h2 className="text-4xl md:text-6xl lg:text-7xl font-black text-navy leading-[0.85] tracking-tighter uppercase">
+              Committed to helping loved ones care for their own family members and friends.
             </h2>
             <div className="space-y-8">
               <p className="text-slate-500 text-sm font-bold leading-relaxed max-w-sm">
-                We strive to be a trusted leader in healthcare, providing innovative medical solutions that promote overall well-being and empower patients to live healthier lives.
+                We strive to be a trusted leader in healthcare, by helping loved ones care for their family members and friends in the comfort of their own homes.
               </p>
 
               <Link to="/about-us" className="flex items-center group">

@@ -5,7 +5,7 @@ const StaffPage: React.FC = () => {
     const teamMembers = [
         { name: 'Quantez Parks', role: 'Chief Executive Officer', img: '/Staff/quantez-hs.png' },
         { name: 'Jeff Whitaker Jr', role: 'Chief Growth Officer', img: '/Staff/jeff-hs.png' },
-        { name: 'Meg Clark', role: 'Chief Operating Officer', img: '/Staff/meg-hs.png' },
+        { name: 'Meg Clark', role: 'Chief Operating Officer', img: '/Staff/meg-hs1.jpg' },
         { name: 'Ahmad Barron', role: 'Chief Marketing Officer', img: '/Staff/ahmad-hs.png' },
         { name: 'Valencia Jones', role: 'Director Of Nursing', img: '/Staff/valencia-hs.png' },
     ];
