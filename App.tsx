@@ -11,6 +11,7 @@ import PrivacyPolicyPage from './components/PrivacyPolicyPage';
 import ContactUsPage from './components/ContactUsPage';
 import FAQPage from './components/FAQPage';
 import Footer from './components/Footer';
+import ReferralFormPage from './components/ReferralFormPage';
 
 const App: React.FC = () => {
   const { pathname, hash, key } = useLocation();
@@ -45,6 +46,8 @@ const App: React.FC = () => {
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/faq" element={<FAQPage />} />
+          <Route path="/rf" element={<ReferralFormPage />} />
+          <Route path="/rf/:employeeSlug" element={<ReferralFormPage />} />
           <Route path="/caregiver-login" element={<ComingSoonPage title="Caregiver Sign-In Coming Soon" />} />
           <Route path="/client-login" element={<ComingSoonPage title="Client Sign-In Coming Soon" />} />
         </Routes>
