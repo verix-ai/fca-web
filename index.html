@@ -4,8 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Friendly Care Agency</title>
-    <link rel="icon" href="/fca-logo.png">
+
+    <!-- Primary Meta -->
+    <title>Friendly Care Agency | Get Paid to Care for Your Loved Ones in Georgia</title>
+    <meta name="description" content="Friendly Care Agency helps Georgia families care for aging or disabled loved ones at home — and get paid for it. Medicaid waiver experts (SOURCE, CCSP, GAPP, ICWP). Call (478) 973-4831." />
+    <meta name="keywords" content="home care Georgia, family caregiver pay, structured family caregiving, Medicaid waiver Georgia, SOURCE waiver, CCSP, GAPP, ICWP, get paid to care for family, in-home care" />
+    <meta name="author" content="Friendly Care Agency" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#0c1214" />
+    <link rel="canonical" href="https://www.friendlycareagency.org/" />
+
+    <!-- Icons -->
+    <link rel="icon" href="/fca-logo.png" />
+    <link rel="apple-touch-icon" href="/fca-logo.png" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Friendly Care Agency" />
+    <meta property="og:title" content="Friendly Care Agency | Get Paid to Care for Your Loved Ones" />
+    <meta property="og:description" content="Georgia families: care for your aging or disabled loved ones at home and get paid for it. Medicaid waiver experts. Call (478) 973-4831." />
+    <meta property="og:url" content="https://www.friendlycareagency.org/" />
+    <meta property="og:image" content="https://www.friendlycareagency.org/care-hero.png" />
+    <meta property="og:image:alt" content="Friendly Care Agency caregiver supporting an elderly woman at home" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Friendly Care Agency | Get Paid to Care for Your Loved Ones" />
+    <meta name="twitter:description" content="Georgia families: care for your aging or disabled loved ones at home and get paid for it. Medicaid waiver experts." />
+    <meta name="twitter:image" content="https://www.friendlycareagency.org/care-hero.png" />
+    <meta name="twitter:image:alt" content="Friendly Care Agency caregiver supporting an elderly woman at home" />
+
+    <!-- Performance hints -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="image" href="/care-hero.png" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
         rel="stylesheet">
@@ -63,12 +97,33 @@
             border-bottom: 8px solid #0c1214;
         }
 
-
-
         .glass-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        /* Visible keyboard focus for accessibility */
+        :focus-visible {
+            outline: 3px solid #81c567;
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+
+        /* Skip link */
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+            top: 0;
+            background: #0c1214;
+            color: #fff;
+            padding: 12px 20px;
+            font-weight: 700;
+            z-index: 9999;
+            border-radius: 0 0 12px 0;
+        }
+        .skip-link:focus {
+            left: 0;
         }
 
         /* Custom scrollbar */
@@ -96,9 +151,40 @@
 }
 </script>
     <link rel="stylesheet" href="/index.css">
+
+    <!-- Structured data: LocalBusiness -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HomeAndConstructionBusiness",
+      "additionalType": "https://schema.org/MedicalBusiness",
+      "name": "Friendly Care Agency",
+      "url": "https://www.friendlycareagency.org/",
+      "logo": "https://www.friendlycareagency.org/fca-logo.png",
+      "image": "https://www.friendlycareagency.org/care-hero.png",
+      "description": "Friendly Care Agency helps Georgia families care for aging or disabled loved ones at home through Medicaid waiver programs (SOURCE, CCSP, GAPP, ICWP) — and helps family caregivers get paid for the care they provide.",
+      "telephone": "+1-478-973-4831",
+      "email": "info@friendlycareagency.org",
+      "areaServed": {
+        "@type": "State",
+        "name": "Georgia"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "GA",
+        "addressCountry": "US"
+      },
+      "priceRange": "Medicaid Waiver",
+      "sameAs": [
+        "https://www.facebook.com/profile.php?id=61568330535941",
+        "https://www.instagram.com/friendlycareagency/"
+      ]
+    }
+    </script>
 </head>
 
 <body class="min-h-screen">
+    <a class="skip-link" href="#main-content">Skip to main content</a>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
 </body>

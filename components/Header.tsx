@@ -47,11 +47,11 @@ const Header: React.FC = () => {
 
       {/* User Actions - Account hidden on Mobile, Call shown everywhere */}
       <div className="flex items-center gap-2 h-full">
-        <Link to="/role-selection" className="hidden w-14 md:w-20 h-full md:flex items-center justify-center bg-mint rounded-[24px] text-navy hover:brightness-95 transition-all">
-          <User size={24} strokeWidth={2.5} />
+        <Link to="/role-selection" aria-label="Sign in or create an account" className="hidden w-14 md:w-20 h-full md:flex items-center justify-center bg-mint rounded-[24px] text-navy hover:brightness-95 transition-all">
+          <User size={24} strokeWidth={2.5} aria-hidden="true" />
         </Link>
-        <a href="tel:4789734831" className="w-14 md:w-auto md:px-10 h-full flex items-center justify-center bg-mint rounded-[24px] text-navy font-black uppercase text-[10px] md:text-xs tracking-[0.2em] hover:brightness-95 transition-all whitespace-nowrap">
-          <Phone size={22} className="md:hidden" strokeWidth={2.5} />
+        <a href="tel:+14789734831" aria-label="Call Friendly Care Agency at (478) 973-4831" className="w-14 md:w-auto md:px-10 h-full flex items-center justify-center bg-mint rounded-[24px] text-navy font-black uppercase text-[10px] md:text-xs tracking-[0.2em] hover:brightness-95 transition-all whitespace-nowrap">
+          <Phone size={22} className="md:hidden" strokeWidth={2.5} aria-hidden="true" />
           <span className="hidden md:inline">Call Today</span>
         </a>
       </div>
@@ -59,16 +59,20 @@ const Header: React.FC = () => {
       {/* Mobile/Tablet Menu Toggle */}
       <div className="xl:hidden flex items-center h-full">
         <button
+          type="button"
           onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-nav"
           className="w-14 md:w-20 h-full flex items-center justify-center bg-mint rounded-[24px] text-navy hover:brightness-95 transition-all"
         >
-          {isMenuOpen ? <X size={24} strokeWidth={2.5} /> : <Menu size={24} strokeWidth={2.5} />}
+          {isMenuOpen ? <X size={24} strokeWidth={2.5} aria-hidden="true" /> : <Menu size={24} strokeWidth={2.5} aria-hidden="true" />}
         </button>
       </div>
 
       {/* Dropdown Menu */}
       {isMenuOpen && (
-        <div className="absolute top-[88px] left-0 right-0 bg-[#f4f2ee] rounded-[24px] p-6 shadow-xl border-2 border-black/5 flex flex-col gap-6 xl:hidden">
+        <div id="mobile-nav" className="absolute top-[88px] left-0 right-0 bg-[#f4f2ee] rounded-[24px] p-6 shadow-xl border-2 border-black/5 flex flex-col gap-6 xl:hidden">
           <nav className="flex flex-col gap-4">
             {navLinks.map((link) => (
               <React.Fragment key={link.name}>
@@ -104,11 +108,12 @@ const Header: React.FC = () => {
               <span className="text-xs tracking-wider uppercase">Account</span>
             </Link>
             <a
-              href="tel:4789734831"
+              href="tel:+14789734831"
               onClick={() => setIsMenuOpen(false)}
+              aria-label="Call Friendly Care Agency at (478) 973-4831"
               className="flex-1 h-14 flex items-center justify-center gap-2 bg-mint rounded-[16px] text-navy font-bold hover:brightness-95 transition-all"
             >
-              <Phone size={20} strokeWidth={2.5} />
+              <Phone size={20} strokeWidth={2.5} aria-hidden="true" />
               <span className="text-xs tracking-wider uppercase">Call Now</span>
             </a>
           </div>

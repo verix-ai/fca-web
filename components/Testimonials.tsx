@@ -63,7 +63,11 @@ const Testimonials: React.FC = () => {
             <div className="flex items-center gap-4">
               <img
                 src={current.image}
-                alt={current.author}
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                width="56"
+                height="56"
                 className="w-14 h-14 rounded-full border-4 border-white/20 object-cover"
               />
               <div className="text-left">
@@ -77,34 +81,42 @@ const Testimonials: React.FC = () => {
           {/* Desktop Controls (Absolute) */}
           <div className="hidden lg:block absolute top-1/2 -translate-y-1/2 -left-12">
             <button
+              type="button"
               onClick={prev}
+              aria-label="Previous testimonial"
               className="w-16 h-16 bg-white border-2 border-black/5 rounded-full shadow-xl flex items-center justify-center text-slate-300 hover:text-navy transition-all cursor-pointer z-10"
             >
-              <ArrowLeft size={32} />
+              <ArrowLeft size={32} aria-hidden="true" />
             </button>
           </div>
           <div className="hidden lg:block absolute top-1/2 -translate-y-1/2 -right-12">
             <button
+              type="button"
               onClick={next}
+              aria-label="Next testimonial"
               className="w-16 h-16 bg-peach text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition-all cursor-pointer z-10"
             >
-              <ArrowRight size={32} />
+              <ArrowRight size={32} aria-hidden="true" />
             </button>
           </div>
 
           {/* Mobile Controls (Inline Flow) */}
           <div className="flex lg:hidden justify-center items-center gap-6 mt-8">
             <button
+              type="button"
               onClick={prev}
+              aria-label="Previous testimonial"
               className="w-14 h-14 bg-white border-2 border-black/5 rounded-full shadow-xl flex items-center justify-center text-slate-300 hover:text-navy transition-all cursor-pointer z-10"
             >
-              <ArrowLeft size={28} />
+              <ArrowLeft size={28} aria-hidden="true" />
             </button>
             <button
+              type="button"
               onClick={next}
+              aria-label="Next testimonial"
               className="w-14 h-14 bg-peach text-white rounded-full shadow-xl flex items-center justify-center hover:scale-110 transition-all cursor-pointer z-10"
             >
-              <ArrowRight size={28} />
+              <ArrowRight size={28} aria-hidden="true" />
             </button>
           </div>
         </div>

@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { HelpCircle, ChevronDown, ChevronUp, Clock, CreditCard, ShieldCheck, Heart, User } from 'lucide-react';
+import { useSEO } from './useSEO';
 
 const FAQPage: React.FC = () => {
+    useSEO({
+        title: 'FAQ | Friendly Care Agency — Caregiver Pay & Eligibility Questions',
+        description: 'Answers to common questions about getting paid to care for a loved one in Georgia, eligibility, Medicaid waiver programs (SOURCE, CCSP, GAPP, ICWP), and caregiver requirements.',
+        path: '/faq',
+    });
+
     const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     const faqs = [

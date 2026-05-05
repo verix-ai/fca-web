@@ -37,7 +37,7 @@ const App: React.FC = () => {
     <div className="main-frame flex flex-col gap-2">
       <Header />
 
-      <main>
+      <main id="main-content">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about-us" element={<AboutUsPage />} />

@@ -1,7 +1,14 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import { useSEO } from './useSEO';
 
 const StaffPage: React.FC = () => {
+    useSEO({
+        title: 'Our Team | Friendly Care Agency Specialists',
+        description: 'Meet the leadership team at Friendly Care Agency — dedicated professionals committed to providing compassionate, high-quality home care across Georgia.',
+        path: '/staff',
+    });
+
     const teamMembers = [
         { name: 'Quantez Parks', role: 'Chief Executive Officer', img: '/Staff/quantez-hs.png' },
         { name: 'Jeff Whitaker Jr', role: 'Chief Growth Officer', img: '/Staff/jeff-hs.png' },
@@ -30,12 +37,14 @@ const StaffPage: React.FC = () => {
                             <div className="relative rounded-[32px] overflow-hidden aspect-[4/5] mb-6 bg-slate-100">
                                 <img
                                     src={member.img}
-                                    alt={member.name}
+                                    alt={`Portrait of ${member.name}, ${member.role} at Friendly Care Agency`}
+                                    loading="lazy"
+                                    decoding="async"
                                     className="w-full h-full object-cover object-top filter grayscale group-hover:grayscale-0 transition-all duration-700"
                                 />
-                                <button className="absolute bottom-4 right-4 w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-navy opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-md">
+                                <span aria-hidden="true" className="absolute bottom-4 right-4 w-12 h-12 bg-white rounded-2xl flex items-center justify-center text-navy opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-md">
                                     <ArrowUpRight size={24} strokeWidth={2.5} />
-                                </button>
+                                </span>
                             </div>
                             <div className="px-2 pb-2">
                                 <h4 className="text-2xl font-black text-navy mb-1">{member.name}</h4>

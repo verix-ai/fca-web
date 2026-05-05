@@ -35,7 +35,11 @@ const About: React.FC = () => {
             <div className="rounded-[40px] overflow-hidden border-[8px] border-black aspect-[4/3] lg:aspect-square shadow-2xl relative">
               <img
                 src="/senior-square.jpg"
-                alt="Doctor consulting senior patient"
+                alt="Friendly Care Agency caregiver assisting a senior client at home"
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="800"
                 className="w-full h-full object-cover"
               />
               {/* Overlay graphics */}

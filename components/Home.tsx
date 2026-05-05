@@ -7,8 +7,15 @@ import WhyChooseUs from './WhyChooseUs';
 import Testimonials from './Testimonials';
 import Team from './Team';
 import EligibilityForm from './EligibilityForm';
+import { useSEO } from './useSEO';
 
 const Home: React.FC = () => {
+    useSEO({
+        title: 'Friendly Care Agency | Get Paid to Care for Your Loved Ones in Georgia',
+        description: "Georgia's #1 choice for home care. Get paid to care for your aging or disabled family members through Medicaid waiver programs. Check your eligibility today.",
+        path: '/',
+    });
+
     return (
         <div className="flex flex-col gap-2">
             <section className="inner-content">

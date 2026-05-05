@@ -1,7 +1,14 @@
 import React from 'react';
 import { ShieldCheck, Lock, Eye, FileText } from 'lucide-react';
+import { useSEO } from './useSEO';
 
 const PrivacyPolicyPage: React.FC = () => {
+    useSEO({
+        title: 'Privacy Policy | Friendly Care Agency',
+        description: 'How Friendly Care Agency collects, uses, and protects your personal information. Read our full privacy policy.',
+        path: '/privacy-policy',
+    });
+
     return (
         <div className="bg-slate-50 min-h-screen">
             {/* Hero Section */}

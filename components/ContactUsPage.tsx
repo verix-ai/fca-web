@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import { Send, Phone, Mail, MapPin } from 'lucide-react';
+import { useSEO } from './useSEO';
 
 const ContactUsPage: React.FC = () => {
+    useSEO({
+        title: 'Contact Friendly Care Agency | Call (478) 973-4831',
+        description: 'Reach Friendly Care Agency by phone, email, or message. Our Georgia-based team responds within 24 hours and is available Mon–Fri, 9am–5pm EST.',
+        path: '/contact-us',
+    });
+
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -58,8 +65,8 @@ const ContactUsPage: React.FC = () => {
                             </div>
                             <h3 className="text-xl font-black text-navy mb-2">Give Us A Call</h3>
                             <p className="text-slate-500 font-medium mb-4">Available Mon-Fri, 9am-5pm EST</p>
-                            <a href="tel:+18005551234" className="text-lg font-bold text-mint hover:text-navy transition-colors">
-                                +1 (800) 555-1234
+                            <a href="tel:+14789734831" className="text-lg font-bold text-mint hover:text-navy transition-colors">
+                                (478) 973-4831
                             </a>
                         </div>
 

@@ -25,13 +25,38 @@ const Footer: React.FC = () => {
             © 2024 Friendly Care Agency. <br className="md:hidden" /> Crafted with Excellence By <a href="https://www.verix.ai" target="_blank" rel="noopener noreferrer" className="text-mint hover:underline">Verix AI</a>.
           </p>
 
-          <div className="flex gap-6">
-            {['FB', 'TW', 'IG', 'LI'].map((social) => (
-              <div key={social} className="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center text-[10px] font-black text-slate-500 hover:text-white hover:border-mint hover:bg-mint/10 transition-all cursor-pointer">
-                {social}
-              </div>
-            ))}
-          </div>
+          <ul className="flex gap-4 list-none p-0 m-0" aria-label="Social media">
+            {/* Facebook */}
+            <li>
+              <a
+                href="https://www.facebook.com/profile.php?id=61568330535941"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Friendly Care Agency on Facebook (opens in a new tab)"
+                className="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center text-slate-500 hover:text-white hover:border-mint hover:bg-mint/10 transition-all"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                </svg>
+              </a>
+            </li>
+            {/* Instagram */}
+            <li>
+              <a
+                href="https://www.instagram.com/friendlycareagency/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Friendly Care Agency on Instagram (opens in a new tab)"
+                className="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center text-slate-500 hover:text-white hover:border-mint hover:bg-mint/10 transition-all"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false">
+                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                </svg>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </footer>

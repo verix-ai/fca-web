@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Internal / placeholder routes — keep out of the index
+Disallow: /caregiver-login
+Disallow: /client-login
+Disallow: /role-selection
+Disallow: /rf
+
+Sitemap: https://www.friendlycareagency.org/sitemap.xml

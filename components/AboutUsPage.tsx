@@ -1,8 +1,15 @@
 import React from 'react';
 import { Sparkles, Calendar, Heart, Users, ArrowUpRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useSEO } from './useSEO';
 
 const AboutUsPage: React.FC = () => {
+    useSEO({
+        title: 'About Friendly Care Agency | Our Story & Mission',
+        description: 'Born from a personal experience caring for a loved one, Friendly Care Agency is a Georgia-based home care provider helping families care for aging and disabled relatives at home.',
+        path: '/about-us',
+    });
+
     return (
         <div className="bg-slate-50 min-h-screen">
             {/* Hero Section */}
@@ -49,7 +56,9 @@ const AboutUsPage: React.FC = () => {
                                 <div className="rounded-[24px] overflow-hidden border-[6px] border-slate-100 shadow-lg">
                                     <img
                                         src="/uncle-joe.png"
-                                        alt="Uncle Joe Stephens"
+                                        alt="Joseph 'Joe' Stephens, the family member whose story inspired Friendly Care Agency"
+                                        loading="lazy"
+                                        decoding="async"
                                         className="w-full h-auto object-cover"
                                     />
                                 </div>

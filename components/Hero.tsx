@@ -4,19 +4,21 @@ import { Link } from 'react-router-dom';
 
 const Hero: React.FC = () => {
   return (
-    <section className="relative px-6 lg:px-12 pt-8 pb-8 overflow-hidden flex flex-col items-center h-[calc(100vh-80px)] min-h-[600px] justify-center">
+    <section aria-label="Hero" className="relative px-6 lg:px-12 pt-8 pb-8 overflow-hidden flex flex-col items-center h-[calc(100vh-80px)] min-h-[600px] justify-center">
 
-
-
+      {/* Visually-hidden, semantically-correct H1 for SEO + screen readers */}
+      <h1 className="sr-only">
+        Friendly Care Agency — Get Paid to Care for Your Loved Ones in Georgia
+      </h1>
 
       {/* Top Typography (Background Layer) */}
       <div className="w-full text-center z-0 -mt-12 md:mt-8 overflow-hidden">
-        <h1 className="text-[3.9vw] sm:text-sm md:text-xl lg:text-2xl font-bold text-mint uppercase tracking-[0.05em] md:tracking-widest mb-4 whitespace-nowrap">
+        <p className="text-[6vw] sm:text-base md:text-2xl lg:text-3xl font-bold text-mint uppercase tracking-[0.05em] md:tracking-widest mb-4 leading-snug px-4 sm:whitespace-nowrap">
           Get Paid To Care Of Your Loved Ones
-        </h1>
-        <h2 className="text-[12vw] md:text-[9vw] font-black text-navy leading-[0.8] tracking-tighter uppercase select-none whitespace-nowrap">
-          YOUR HEALTH,
-        </h2>
+        </p>
+        <span aria-hidden="true" className="block text-[12vw] md:text-[9vw] font-black text-navy leading-[0.8] tracking-tighter uppercase select-none whitespace-nowrap">
+          YOUR CARE,
+        </span>
       </div>
 
       {/* Doctor Image Container (Middle Layer) */}
@@ -24,19 +26,24 @@ const Hero: React.FC = () => {
         <div className="relative">
           <img
             src="/care-hero.png"
-            alt="Caregiver and Grandma"
+            alt="Friendly Care Agency caregiver smiling with an elderly grandmother in a sunlit home"
+            width="800"
+            height="800"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
             className="h-auto max-h-[50vh] w-auto object-contain drop-shadow-[0_25px_50px_rgba(0,0,0,0.15)] rounded-b-full scale-100 lg:scale-110 origin-bottom"
           />
           {/* Subtle glow behind doctor */}
-          <div className="absolute inset-0 bg-mint/10 rounded-full blur-[100px] -z-10"></div>
+          <div className="absolute inset-0 bg-mint/10 rounded-full blur-[100px] -z-10" aria-hidden="true"></div>
         </div>
       </div>
 
       {/* Bottom Typography (Foreground Layer) */}
-      <div className="absolute bottom-[28%] w-full text-center z-20 pointer-events-none">
-        <h2 className="text-[12vw] md:text-[9vw] font-black text-navy leading-[0.8] tracking-tighter uppercase select-none whitespace-nowrap">
+      <div className="absolute bottom-[28%] w-full text-center z-20 pointer-events-none" aria-hidden="true">
+        <span className="block text-[12vw] md:text-[9vw] font-black text-navy leading-[0.8] tracking-tighter uppercase select-none whitespace-nowrap">
           OUR PRIORITY
-        </h2>
+        </span>
       </div>
 
       {/* Bottom Controls Area */}

@@ -164,10 +164,12 @@ const EligibilityForm: React.FC = () => {
                                     value={formData.full_name}
                                     onChange={updateField('full_name')}
                                     aria-invalid={!!errors.full_name}
+                                    aria-describedby={errors.full_name ? 'name-error' : undefined}
+                                    autoComplete="name"
                                     className={inputClass}
                                     placeholder="John Doe"
                                 />
-                                {errors.full_name && <p className={errorClass}>{errors.full_name}</p>}
+                                {errors.full_name && <p id="name-error" className={errorClass}>{errors.full_name}</p>}
                             </div>
 
                             <div className="space-y-2 text-left">
@@ -178,13 +180,14 @@ const EligibilityForm: React.FC = () => {
                                     value={formData.phone}
                                     onChange={updateField('phone')}
                                     aria-invalid={!!errors.phone}
+                                    aria-describedby={errors.phone ? 'phone-error' : undefined}
                                     inputMode="tel"
                                     autoComplete="tel-national"
                                     maxLength={14}
                                     className={inputClass}
                                     placeholder="(555) 123-4567"
                                 />
-                                {errors.phone && <p className={errorClass}>{errors.phone}</p>}
+                                {errors.phone && <p id="phone-error" className={errorClass}>{errors.phone}</p>}
                             </div>
 
                             <div className="space-y-2 text-left">
@@ -195,10 +198,12 @@ const EligibilityForm: React.FC = () => {
                                     value={formData.email}
                                     onChange={updateField('email')}
                                     aria-invalid={!!errors.email}
+                                    aria-describedby={errors.email ? 'email-error' : undefined}
+                                    autoComplete="email"
                                     className={inputClass}
                                     placeholder="john@example.com"
                                 />
-                                {errors.email && <p className={errorClass}>{errors.email}</p>}
+                                {errors.email && <p id="email-error" className={errorClass}>{errors.email}</p>}
                             </div>
 
                             <div className="space-y-2 text-left">
@@ -212,10 +217,11 @@ const EligibilityForm: React.FC = () => {
                                     value={formData.zip}
                                     onChange={updateField('zip')}
                                     aria-invalid={!!errors.zip}
+                                    aria-describedby={errors.zip ? 'zip-error' : undefined}
                                     className={inputClass}
                                     placeholder="12345"
                                 />
-                                {errors.zip && <p className={errorClass}>{errors.zip}</p>}
+                                {errors.zip && <p id="zip-error" className={errorClass}>{errors.zip}</p>}
                             </div>
                         </div>
 

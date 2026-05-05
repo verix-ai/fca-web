@@ -29,7 +29,10 @@ const WhyChooseUs: React.FC = () => {
       {/* Background Image */}
       <img
         src="/wcu-bg.jpg"
-        alt="Medical Facility"
+        alt=""
+        aria-hidden="true"
+        loading="lazy"
+        decoding="async"
         className="absolute inset-0 w-full h-full object-cover brightness-[0.3]"
       />
 
