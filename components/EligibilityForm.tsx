@@ -9,6 +9,7 @@ type FormFields = {
     phone: string;
     email: string;
     zip: string;
+    medicaid_number: string;
 };
 
 type FieldErrors = Partial<Record<keyof FormFields, string>>;
@@ -50,6 +51,7 @@ const EligibilityForm: React.FC = () => {
         phone: '',
         email: '',
         zip: '',
+        medicaid_number: '',
     });
     const [errors, setErrors] = useState<FieldErrors>({});
     const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
@@ -72,6 +74,8 @@ const EligibilityForm: React.FC = () => {
                 value = formatUSPhone(value);
             } else if (field === 'zip') {
                 value = value.replace(/\D/g, '').slice(0, 5);
+            } else if (field === 'medicaid_number') {
+                value = value.replace(/\D/g, '').slice(0, 12);
             }
             const next = { ...formData, [field]: value };
             setFormData(next);
@@ -104,6 +108,9 @@ const EligibilityForm: React.FC = () => {
                     phone: formData.phone.trim(),
                     email: formData.email.trim(),
                     zip: formData.zip.trim(),
+                    ...(formData.medicaid_number.trim() && {
+                        medicaid_number: formData.medicaid_number.trim(),
+                    }),
                 }),
             });
 
@@ -223,6 +230,26 @@ const EligibilityForm: React.FC = () => {
                                 />
                                 {errors.zip && <p id="zip-error" className={errorClass}>{errors.zip}</p>}
                             </div>
+                        </div>
+
+                        <div className="space-y-2 text-left mb-8">
+                            <label htmlFor="medicaid_number" className={labelClass}>
+                                Medicaid Number{' '}
+                                <span className="text-slate-400 font-bold normal-case tracking-normal">(optional)</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="medicaid_number"
+                                inputMode="numeric"
+                                maxLength={12}
+                                value={formData.medicaid_number}
+                                onChange={updateField('medicaid_number')}
+                                className={inputClass}
+                                placeholder="123456789"
+                            />
+                            <p className="text-xs text-slate-500 ml-4 mt-2 font-medium">
+                                Optional — but providing it speeds up your eligibility check so our team can confirm coverage faster.
+                            </p>
                         </div>
 
                         {submitError && (
