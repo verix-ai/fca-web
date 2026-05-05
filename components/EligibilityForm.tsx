@@ -74,8 +74,6 @@ const EligibilityForm: React.FC = () => {
                 value = formatUSPhone(value);
             } else if (field === 'zip') {
                 value = value.replace(/\D/g, '').slice(0, 5);
-            } else if (field === 'medicaid_number') {
-                value = value.replace(/\D/g, '').slice(0, 12);
             }
             const next = { ...formData, [field]: value };
             setFormData(next);
@@ -240,12 +238,10 @@ const EligibilityForm: React.FC = () => {
                             <input
                                 type="text"
                                 id="medicaid_number"
-                                inputMode="numeric"
-                                maxLength={12}
                                 value={formData.medicaid_number}
                                 onChange={updateField('medicaid_number')}
                                 className={inputClass}
-                                placeholder="123456789"
+                                placeholder="GA Medicaid #"
                             />
                             <p className="text-xs text-slate-500 ml-4 mt-2 font-medium">
                                 Optional — but providing it speeds up your eligibility check so our team can confirm coverage faster.
