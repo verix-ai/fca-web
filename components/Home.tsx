@@ -11,7 +11,7 @@ import { useSEO } from './useSEO';
 
 const Home: React.FC = () => {
     useSEO({
-        title: 'Friendly Care Agency | Get Paid to Care for Your Loved Ones in Georgia',
+        title: 'Get Paid to Care for Loved Ones | Friendly Care Agency GA',
         description: "Georgia's #1 choice for home care. Get paid to care for your aging or disabled family members through Medicaid waiver programs. Check your eligibility today.",
         path: '/',
     });
