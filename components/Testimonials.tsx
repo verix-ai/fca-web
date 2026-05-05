@@ -63,8 +63,7 @@ const Testimonials: React.FC = () => {
             <div className="flex items-center gap-4">
               <img
                 src={current.image}
-                alt=""
-                aria-hidden="true"
+                alt={`${current.author}, Friendly Care Agency client`}
                 loading="lazy"
                 width="56"
                 height="56"
