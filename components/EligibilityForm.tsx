@@ -57,9 +57,23 @@ const EligibilityForm: React.FC = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
 
+    const formatUSPhone = (raw: string): string => {
+        const digits = raw.replace(/\D/g, '').slice(0, 10);
+        if (digits.length === 0) return '';
+        if (digits.length < 4) return `(${digits}`;
+        if (digits.length < 7) return `(${digits.slice(0, 3)}) ${digits.slice(3)}`;
+        return `(${digits.slice(0, 3)}) ${digits.slice(3, 6)}-${digits.slice(6)}`;
+    };
+
     const updateField = (field: keyof FormFields) =>
         (e: React.ChangeEvent<HTMLInputElement>) => {
-            const next = { ...formData, [field]: e.target.value };
+            let value = e.target.value;
+            if (field === 'phone') {
+                value = formatUSPhone(value);
+            } else if (field === 'zip') {
+                value = value.replace(/\D/g, '').slice(0, 5);
+            }
+            const next = { ...formData, [field]: value };
             setFormData(next);
             if (hasAttemptedSubmit) {
                 setErrors(validate(next));
@@ -164,6 +178,9 @@ const EligibilityForm: React.FC = () => {
                                     value={formData.phone}
                                     onChange={updateField('phone')}
                                     aria-invalid={!!errors.phone}
+                                    inputMode="tel"
+                                    autoComplete="tel-national"
+                                    maxLength={14}
                                     className={inputClass}
                                     placeholder="(555) 123-4567"
                                 />
@@ -190,6 +207,8 @@ const EligibilityForm: React.FC = () => {
                                     type="text"
                                     id="zip"
                                     inputMode="numeric"
+                                    autoComplete="postal-code"
+                                    maxLength={5}
                                     value={formData.zip}
                                     onChange={updateField('zip')}
                                     aria-invalid={!!errors.zip}
