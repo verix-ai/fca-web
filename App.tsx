@@ -12,9 +12,11 @@ import ContactUsPage from './components/ContactUsPage';
 import FAQPage from './components/FAQPage';
 import Footer from './components/Footer';
 import ReferralFormPage from './components/ReferralFormPage';
+import { trackPageView } from './lib/pixel';
 
 const App: React.FC = () => {
   const { pathname, hash, key } = useLocation();
+  const isInitialPageView = React.useRef(true);
 
   React.useEffect(() => {
     // if not a hash link, scroll to top
@@ -32,6 +34,15 @@ const App: React.FC = () => {
       }, 0);
     }
   }, [pathname, hash, key]);
+
+  // Meta Pixel: base snippet fires PageView on initial load; fire on subsequent route changes only
+  React.useEffect(() => {
+    if (isInitialPageView.current) {
+      isInitialPageView.current = false;
+      return;
+    }
+    trackPageView();
+  }, [pathname]);
 
   return (
     <div className="main-frame flex flex-col gap-2">

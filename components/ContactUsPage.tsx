@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Send, Phone, Mail, MapPin } from 'lucide-react';
 import { useSEO } from './useSEO';
+import { trackContact, trackCustom } from '../lib/pixel';
 
 const ContactUsPage: React.FC = () => {
     useSEO({
@@ -31,6 +32,7 @@ const ContactUsPage: React.FC = () => {
         e.preventDefault();
         // Here you would typically send the form data to your backend
         console.log('Form submitted:', formData);
+        trackContact({ content_name: 'Contact Form' });
         setIsSubmitted(true);
         // Reset form after submission if desired
         // setFormData({ firstName: '', lastName: '', phoneNumber: '', email: '', message: '' });
@@ -65,7 +67,11 @@ const ContactUsPage: React.FC = () => {
                             </div>
                             <h3 className="text-xl font-black text-navy mb-2">Give Us A Call</h3>
                             <p className="text-slate-500 font-medium mb-4">Available Mon-Fri, 9am-5pm EST</p>
-                            <a href="tel:+14789734831" className="text-lg font-bold text-mint hover:text-navy transition-colors">
+                            <a
+                                href="tel:+14789734831"
+                                onClick={() => trackCustom('PhoneClick', { source: 'contact-page-card' })}
+                                className="text-lg font-bold text-mint hover:text-navy transition-colors"
+                            >
                                 (478) 973-4831
                             </a>
                         </div>

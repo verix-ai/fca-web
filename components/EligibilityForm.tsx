@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ArrowUpRight, CheckCircle } from 'lucide-react';
+import { trackInitiateCheckout, trackLead } from '../lib/pixel';
 
 const SUBMIT_LEAD_URL = 'https://fupcxuwfonuajbblwlfd.supabase.co/functions/v1/submit-lead';
 const SUPPORT_PHONE = '(478) 973-4831';
@@ -58,6 +59,7 @@ const EligibilityForm: React.FC = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
+    const hasTrackedFormStart = useRef(false);
 
     const formatUSPhone = (raw: string): string => {
         const digits = raw.replace(/\D/g, '').slice(0, 10);
@@ -90,6 +92,10 @@ const EligibilityForm: React.FC = () => {
             setFormData(next);
             if (hasAttemptedSubmit) {
                 setErrors(validate(next));
+            }
+            if (!hasTrackedFormStart.current && value.trim().length > 0) {
+                hasTrackedFormStart.current = true;
+                trackInitiateCheckout({ content_name: 'Eligibility Check' });
             }
         };
 
@@ -124,6 +130,7 @@ const EligibilityForm: React.FC = () => {
             });
 
             if (res.ok) {
+                trackLead({ content_name: 'Eligibility Check' });
                 setIsSubmitted(true);
                 return;
             }

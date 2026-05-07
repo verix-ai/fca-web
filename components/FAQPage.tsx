@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { HelpCircle, ChevronDown, ChevronUp, Clock, CreditCard, ShieldCheck, Heart, User } from 'lucide-react';
 import { useSEO } from './useSEO';
+import { trackCustom } from '../lib/pixel';
 
 const FAQPage: React.FC = () => {
     useSEO({
@@ -21,7 +22,11 @@ const FAQPage: React.FC = () => {
                     a: (
                         <>
                             Payment is based on your location. Please call us to find out your rates. (
-                            <a href="tel:4789734831" className="text-mint hover:text-navy transition-colors font-bold underline">
+                            <a
+                                href="tel:4789734831"
+                                onClick={() => trackCustom('PhoneClick', { source: 'faq-page' })}
+                                className="text-mint hover:text-navy transition-colors font-bold underline"
+                            >
                                 Call Us Now
                             </a>
                             )
