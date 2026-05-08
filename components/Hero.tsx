@@ -14,7 +14,7 @@ const Hero: React.FC = () => {
       {/* Top Typography (Background Layer) */}
       <div className="w-full text-center z-0 -mt-12 md:mt-8 overflow-hidden">
         <p className="text-[6vw] sm:text-base md:text-2xl lg:text-3xl font-bold text-mint uppercase tracking-[0.05em] md:tracking-widest mb-4 leading-snug px-4 sm:whitespace-nowrap">
-          Get Paid To Care Of Your Loved Ones
+          Get Paid To Take Care Of Your Loved Ones
         </p>
         <span aria-hidden="true" className="block text-[12vw] md:text-[9vw] font-black text-navy leading-[0.8] tracking-tighter uppercase select-none whitespace-nowrap">
           YOUR CARE,
