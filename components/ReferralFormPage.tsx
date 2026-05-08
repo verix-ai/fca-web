@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { Send, ArrowRight, ArrowLeft, CheckCircle2, Building, User, HeartPulse, FileText } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import { Send, ArrowRight, ArrowLeft, CheckCircle2, Building, User, HeartPulse, FileText, Loader2, AlertTriangle } from 'lucide-react';
+import { getMarketerBySlug, ResolvedMarketer } from '../lib/marketerLookup';
+import { submitReferral } from '../lib/referralSubmit';
+import { supabase } from '../lib/supabase';
 
 const InputWrapper = ({ label, required = false, children }: { label: string, required?: boolean, children: React.ReactNode }) => (
     <div className="space-y-2">
@@ -79,16 +82,67 @@ const Checkbox = ({ name, label, checked, onChange }: any) => (
 );
 
 const ReferralFormPage: React.FC = () => {
-    const { employeeSlug } = useParams();
+    const { slug } = useParams();
 
     // Current wizard step (1 to 4)
     const [currentStep, setCurrentStep] = useState(1);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
+    // Marketer resolution
+    const [marketer, setMarketer] = useState<ResolvedMarketer | null>(null);
+    const [marketerLoading, setMarketerLoading] = useState(true);
+    const [marketerNotFound, setMarketerNotFound] = useState(false);
+
+    // Submission state
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
+
+    // Honeypot — never visible, never touched by humans
+    const [hp, setHp] = useState('');
+
+    useEffect(() => {
+        if (!slug) {
+            setMarketerNotFound(true);
+            setMarketerLoading(false);
+            return;
+        }
+        let cancelled = false;
+        (async () => {
+            const m = await getMarketerBySlug(slug);
+            if (cancelled) return;
+            if (!m) setMarketerNotFound(true);
+            else setMarketer(m);
+            setMarketerLoading(false);
+        })();
+        return () => { cancelled = true; };
+    }, [slug]);
+
+    // Programs fetched live from the marketer's organization
+    const [programs, setPrograms] = useState<string[]>([]);
+    const [programsLoading, setProgramsLoading] = useState(false);
+
+    useEffect(() => {
+        if (!marketer?.organization_id) return;
+        let cancelled = false;
+        setProgramsLoading(true);
+        (async () => {
+            const { data, error } = await supabase.rpc('get_programs_for_org', {
+                p_org_id: marketer.organization_id,
+            });
+            if (cancelled) return;
+            if (!error && Array.isArray(data)) {
+                setPrograms((data as { name: string }[]).map((row) => row.name));
+            } else {
+                setPrograms([]);
+            }
+            setProgramsLoading(false);
+        })();
+        return () => { cancelled = true; };
+    }, [marketer?.organization_id]);
+
     // Form Data State
     const [formData, setFormData] = useState({
         // Step 1: Intake & Referral Information / Referral & Caregiver Details
-        marketerName: employeeSlug ? employeeSlug.replace(/-/g, ' ') : '',
         serviceProgramRequested: '',
         referralName: '',
         sex: '',
@@ -186,11 +240,20 @@ const ReferralFormPage: React.FC = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        console.log('Final Form Data Submitted:', formData);
-        setIsSubmitted(true);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (isSubmitting || !slug || !marketer) return;
+        setIsSubmitting(true);
+        setSubmitError(null);
+        try {
+            await submitReferral(slug, formData as Parameters<typeof submitReferral>[1], hp);
+            setIsSubmitted(true);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        } catch (err) {
+            setSubmitError(err instanceof Error ? err.message : 'Could not submit. Please try again.');
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     // --- Steps Content ---
@@ -201,8 +264,10 @@ const ReferralFormPage: React.FC = () => {
                 <p className="text-slate-500">Please provide the initial request details.</p>
             </div>
             <div className="grid md:grid-cols-2 gap-6">
-                <InputWrapper label="Marketer Name">
-                    <BaseInput name="marketerName" value={formData.marketerName} onChange={handleChange} disabled={!!employeeSlug} placeholder="Marketer's Name" />
+                <InputWrapper label="Referred by">
+                    <div className="w-full h-14 bg-emerald-50 border border-emerald-200 rounded-2xl px-6 flex items-center font-bold text-navy">
+                        {marketer?.name ?? '—'}
+                    </div>
                 </InputWrapper>
                 <InputWrapper label="Service/Program Requested" required>
                     <BaseSelect
@@ -210,8 +275,8 @@ const ReferralFormPage: React.FC = () => {
                         value={formData.serviceProgramRequested}
                         onChange={handleChange}
                         required
-                        options={['CCSP', 'GAPP', 'ICWP', 'SFC', 'SOURCE', 'Not Sure']}
-                        placeholder="Select Program"
+                        options={programs}
+                        placeholder={programsLoading ? 'Loading…' : (programs.length === 0 ? 'No programs available' : 'Select Program')}
                     />
                 </InputWrapper>
             </div>
@@ -224,7 +289,7 @@ const ReferralFormPage: React.FC = () => {
                         <BaseInput name="referralName" value={formData.referralName} onChange={handleChange} required placeholder="Client's Full Name" />
                     </InputWrapper>
                     <InputWrapper label="Sex" required>
-                        <BaseSelect name="sex" value={formData.sex} onChange={handleChange} required options={['Male', 'Female']} placeholder="Select Sex" />
+                        <BaseSelect name="sex" value={formData.sex} onChange={handleChange} required options={['Female', 'Male', 'Prefer not to say']} placeholder="Select Sex" />
                     </InputWrapper>
                     <InputWrapper label="Referral DOB" required>
                         <BaseInput type="date" name="referralDOB" value={formData.referralDOB} onChange={handleChange} required />
@@ -427,7 +492,23 @@ const ReferralFormPage: React.FC = () => {
             <div className="max-w-4xl mx-auto px-6 -mt-10 relative z-20">
                 <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-xl shadow-slate-200/50 border border-slate-100">
 
-                    {isSubmitted ? (
+                    {marketerLoading ? (
+                        <div className="text-center py-20 text-slate-500">
+                            <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4" />
+                            Loading…
+                        </div>
+                    ) : marketerNotFound ? (
+                        <div className="text-center py-20 px-4">
+                            <div className="w-24 h-24 bg-rose-50 rounded-full flex items-center justify-center text-rose-500 mx-auto mb-8">
+                                <AlertTriangle size={48} />
+                            </div>
+                            <h2 className="text-4xl font-black text-navy mb-4">Referral link not found</h2>
+                            <p className="text-xl text-slate-500 max-w-lg mx-auto mb-10">
+                                We couldn't find that referral link. Please check the link from your marketer or
+                                <Link to="/contact-us" className="text-mint underline ml-1">contact us</Link>.
+                            </p>
+                        </div>
+                    ) : isSubmitted ? (
                         <div className="text-center py-20 px-4 animate-in zoom-in-95 duration-500">
                             <div className="w-24 h-24 bg-mint/20 rounded-full flex items-center justify-center text-mint mx-auto mb-8">
                                 <CheckCircle2 size={48} />
@@ -475,11 +556,28 @@ const ReferralFormPage: React.FC = () => {
                             </div>
 
                             <form onSubmit={(e) => { e.preventDefault(); if (currentStep === 4) handleSubmit(e); else handleNext(); }}>
+                                {/* Honeypot — humans never see this; bots fill every field */}
+                                <input
+                                    type="text"
+                                    name="website_url"
+                                    value={hp}
+                                    onChange={(e) => setHp(e.target.value)}
+                                    tabIndex={-1}
+                                    autoComplete="off"
+                                    aria-hidden="true"
+                                    style={{ position: 'absolute', left: '-10000px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }}
+                                />
 
                                 {currentStep === 1 && renderStep1()}
                                 {currentStep === 2 && renderStep2()}
                                 {currentStep === 3 && renderStep3()}
                                 {currentStep === 4 && renderStep4()}
+
+                                {submitError && (
+                                    <div className="mt-4 p-4 bg-rose-50 border border-rose-200 rounded-2xl text-rose-700 font-medium">
+                                        {submitError}
+                                    </div>
+                                )}
 
                                 {/* Action Buttons */}
                                 <div className={`flex items-center pt-10 mt-10 border-t border-slate-100 ${currentStep === 1 ? 'justify-end' : 'justify-between'}`}>
@@ -505,10 +603,11 @@ const ReferralFormPage: React.FC = () => {
                                     ) : (
                                         <button
                                             type="submit"
-                                            className="px-10 py-4 bg-mint text-navy rounded-full font-black uppercase tracking-[0.2em] text-sm hover:bg-navy hover:text-white transition-all flex items-center gap-3 shadow-lg shadow-mint/30"
+                                            disabled={isSubmitting}
+                                            className="px-10 py-4 bg-mint text-navy rounded-full font-black uppercase tracking-[0.2em] text-sm hover:bg-navy hover:text-white transition-all flex items-center gap-3 shadow-lg shadow-mint/30 disabled:opacity-60"
                                         >
-                                            <span>Submit Referral</span>
-                                            <Send size={18} />
+                                            {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
+                                            <span>{isSubmitting ? 'Submitting…' : 'Submit Referral'}</span>
                                         </button>
                                     )}
                                 </div>
