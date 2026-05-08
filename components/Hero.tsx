@@ -17,7 +17,7 @@ const Hero: React.FC = () => {
           Get Paid To Take Care Of Your Loved Ones
         </p>
         <span aria-hidden="true" className="block text-[12vw] md:text-[9vw] font-black text-navy leading-[0.8] tracking-tighter uppercase select-none whitespace-nowrap">
-          YOUR CARE,
+          YOUR CARE
         </span>
       </div>
 
