@@ -6,7 +6,7 @@ import { submitReferral } from '../lib/referralSubmit';
 import { supabase } from '../lib/supabase';
 
 const InputWrapper = ({ label, required = false, children }: { label: string, required?: boolean, children: React.ReactNode }) => (
-    <div className="space-y-2">
+    <div className="space-y-2 min-w-0">
         <label className="text-sm font-bold text-navy uppercase tracking-wider flex items-center">
             {label} {required && <span className="text-mint ml-1 text-lg leading-none">*</span>}
         </label>
@@ -23,7 +23,7 @@ const BaseInput = ({ name, type = 'text', placeholder, required = false, value, 
         required={required}
         disabled={disabled}
         maxLength={maxLength}
-        className="w-full h-14 bg-slate-50 border border-slate-200 rounded-2xl px-6 outline-none focus:ring-2 focus:ring-mint focus:border-transparent transition-all font-medium text-navy placeholder:text-slate-400 disabled:opacity-60 disabled:cursor-not-allowed"
+        className="block w-full max-w-full h-14 bg-slate-50 border border-slate-200 rounded-2xl px-4 sm:px-6 outline-none focus:ring-2 focus:ring-mint focus:border-transparent transition-all font-medium text-navy placeholder:text-slate-400 disabled:opacity-60 disabled:cursor-not-allowed"
         placeholder={placeholder}
     />
 );
@@ -34,7 +34,7 @@ const BaseSelect = ({ name, required = false, value, onChange, options, placehol
         value={value}
         onChange={onChange}
         required={required}
-        className="w-full h-14 bg-slate-50 border border-slate-200 rounded-2xl px-6 outline-none focus:ring-2 focus:ring-mint focus:border-transparent transition-all font-medium text-navy cursor-pointer appearance-none"
+        className="block w-full max-w-full h-14 bg-slate-50 border border-slate-200 rounded-2xl px-4 sm:px-6 outline-none focus:ring-2 focus:ring-mint focus:border-transparent transition-all font-medium text-navy cursor-pointer appearance-none"
     >
         <option value="" disabled hidden>{placeholder || "Select option"}</option>
         {options.map((opt: string) => (
@@ -265,7 +265,7 @@ const ReferralFormPage: React.FC = () => {
             </div>
             <div className="grid md:grid-cols-2 gap-6">
                 <InputWrapper label="Referred by">
-                    <div className="w-full h-14 bg-emerald-50 border border-emerald-200 rounded-2xl px-6 flex items-center font-bold text-navy">
+                    <div className="w-full h-14 bg-emerald-50 border border-emerald-200 rounded-2xl px-4 sm:px-6 flex items-center font-bold text-navy truncate">
                         {marketer?.name ?? '—'}
                     </div>
                 </InputWrapper>
@@ -384,7 +384,7 @@ const ReferralFormPage: React.FC = () => {
                 <p className="text-slate-500">Medical information and assistance required.</p>
             </div>
 
-            <div className="grid gap-8 p-8 bg-slate-50 rounded-3xl border border-slate-100">
+            <div className="grid gap-8 p-5 sm:p-8 bg-slate-50 rounded-3xl border border-slate-100">
                 <InputWrapper label="Do you receive Social Security or Disability Benefits?" required>
                     <RadioGroup name="receivesBenefits" options={['Yes', 'No']} value={formData.receivesBenefits} onChange={handleChange} required />
                 </InputWrapper>
@@ -462,7 +462,7 @@ const ReferralFormPage: React.FC = () => {
                         value={formData.additionalInfo}
                         onChange={handleChange}
                         rows={5}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 outline-none focus:ring-2 focus:ring-mint focus:border-transparent transition-all font-medium text-navy placeholder:text-slate-400 resize-none"
+                        className="block w-full max-w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 sm:px-6 py-4 outline-none focus:ring-2 focus:ring-mint focus:border-transparent transition-all font-medium text-navy placeholder:text-slate-400 resize-none"
                         placeholder="Add any extra details we should know..."
                     ></textarea>
                 </InputWrapper>
@@ -471,26 +471,26 @@ const ReferralFormPage: React.FC = () => {
     );
 
     return (
-        <div className="bg-slate-50 min-h-screen pb-20">
+        <div className="bg-slate-50 min-h-screen pb-20 overflow-x-hidden">
             {/* Hero Section */}
             <div className="bg-navy text-white pt-32 pb-24 relative overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-                <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
+                <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
                     <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 rounded-full text-xs font-bold uppercase tracking-wider mb-8 backdrop-blur-sm">
                         <FileText size={14} className="text-mint" />
                         <span>Referral Capture</span>
                     </div>
-                    <h1 className="text-5xl md:text-7xl font-black mb-6 tracking-tighter leading-tight">
+                    <h1 className="text-4xl sm:text-5xl md:text-7xl font-black mb-6 tracking-tighter leading-tight">
                         REFERRAL FORM
                     </h1>
-                    <p className="text-xl md:text-2xl text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed">
+                    <p className="text-lg sm:text-xl md:text-2xl text-slate-300 max-w-2xl mx-auto font-medium leading-relaxed">
                         Log referral details, requested services, and caregiver contacts to kick off the onboarding workflow.
                     </p>
                 </div>
             </div>
 
-            <div className="max-w-4xl mx-auto px-6 -mt-10 relative z-20">
-                <div className="bg-white p-8 md:p-12 rounded-[40px] shadow-xl shadow-slate-200/50 border border-slate-100">
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 -mt-10 relative z-20">
+                <div className="bg-white p-5 sm:p-8 md:p-12 rounded-[40px] shadow-xl shadow-slate-200/50 border border-slate-100">
 
                     {marketerLoading ? (
                         <div className="text-center py-20 text-slate-500">
@@ -580,12 +580,12 @@ const ReferralFormPage: React.FC = () => {
                                 )}
 
                                 {/* Action Buttons */}
-                                <div className={`flex items-center pt-10 mt-10 border-t border-slate-100 ${currentStep === 1 ? 'justify-end' : 'justify-between'}`}>
+                                <div className={`flex flex-wrap items-center gap-3 pt-10 mt-10 border-t border-slate-100 ${currentStep === 1 ? 'justify-end' : 'justify-between'}`}>
                                     {currentStep > 1 && (
                                         <button
                                             type="button"
                                             onClick={handleBack}
-                                            className="px-8 py-4 bg-slate-100 text-navy rounded-full font-bold uppercase tracking-wider text-sm hover:bg-slate-200 transition-all flex items-center gap-2"
+                                            className="px-5 py-3 sm:px-8 sm:py-4 bg-slate-100 text-navy rounded-full font-bold uppercase tracking-wider text-sm hover:bg-slate-200 transition-all flex items-center gap-2"
                                         >
                                             <ArrowLeft size={18} />
                                             <span>Back</span>
@@ -595,7 +595,7 @@ const ReferralFormPage: React.FC = () => {
                                     {currentStep < 4 ? (
                                         <button
                                             type="submit" // Trigger HTML5 form validation before next step
-                                            className="px-10 py-4 bg-navy text-white rounded-full font-bold uppercase tracking-wider text-sm hover:bg-mint hover:text-navy transition-all flex items-center gap-2 shadow-lg shadow-navy/20"
+                                            className="px-6 py-3 sm:px-10 sm:py-4 bg-navy text-white rounded-full font-bold uppercase tracking-wider text-sm hover:bg-mint hover:text-navy transition-all flex items-center gap-2 shadow-lg shadow-navy/20"
                                         >
                                             <span>Next Step</span>
                                             <ArrowRight size={18} />
@@ -604,7 +604,7 @@ const ReferralFormPage: React.FC = () => {
                                         <button
                                             type="submit"
                                             disabled={isSubmitting}
-                                            className="px-10 py-4 bg-mint text-navy rounded-full font-black uppercase tracking-[0.2em] text-sm hover:bg-navy hover:text-white transition-all flex items-center gap-3 shadow-lg shadow-mint/30 disabled:opacity-60"
+                                            className="px-6 py-3 sm:px-10 sm:py-4 bg-mint text-navy rounded-full font-black uppercase tracking-wider sm:tracking-[0.2em] text-sm hover:bg-navy hover:text-white transition-all flex items-center gap-3 shadow-lg shadow-mint/30 disabled:opacity-60"
                                         >
                                             {isSubmitting ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
                                             <span>{isSubmitting ? 'Submitting…' : 'Submit Referral'}</span>
