@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation, Navigate, useParams } from 'react-router-dom';
 import Header from './components/Header';
 import Home from './components/Home';
 import AboutUsPage from './components/AboutUsPage';
@@ -57,8 +57,10 @@ const App: React.FC = () => {
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/faq" element={<FAQPage />} />
-          <Route path="/rf" element={<ReferralFormPage />} />
-          <Route path="/rf/:employeeSlug" element={<ReferralFormPage />} />
+          <Route path="/ref/:slug" element={<ReferralFormPage />} />
+          {/* Backward compat for any printed materials with /rf/<slug> */}
+          <Route path="/rf/:slug" element={<RefRedirect />} />
+          <Route path="/rf" element={<RefRedirect />} />
           <Route path="/caregiver-login" element={<ComingSoonPage title="Caregiver Sign-In Coming Soon" />} />
           <Route path="/client-login" element={<ComingSoonPage title="Client Sign-In Coming Soon" />} />
         </Routes>
@@ -67,6 +69,11 @@ const App: React.FC = () => {
       <Footer />
     </div>
   );
+};
+
+const RefRedirect: React.FC = () => {
+  const { slug } = useParams();
+  return <Navigate to={slug ? `/ref/${slug}` : '/'} replace />;
 };
 
 export default App;
