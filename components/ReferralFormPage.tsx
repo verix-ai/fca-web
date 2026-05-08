@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Send, ArrowRight, ArrowLeft, CheckCircle2, Building, User, HeartPulse, FileText, Loader2, AlertTriangle } from 'lucide-react';
 import { getMarketerBySlug, ResolvedMarketer } from '../lib/marketerLookup';
 import { submitReferral } from '../lib/referralSubmit';
+import { supabase } from '../lib/supabase';
 
 const InputWrapper = ({ label, required = false, children }: { label: string, required?: boolean, children: React.ReactNode }) => (
     <div className="space-y-2">
@@ -115,6 +116,29 @@ const ReferralFormPage: React.FC = () => {
         })();
         return () => { cancelled = true; };
     }, [slug]);
+
+    // Programs fetched live from the marketer's organization
+    const [programs, setPrograms] = useState<string[]>([]);
+    const [programsLoading, setProgramsLoading] = useState(false);
+
+    useEffect(() => {
+        if (!marketer?.organization_id) return;
+        let cancelled = false;
+        setProgramsLoading(true);
+        (async () => {
+            const { data, error } = await supabase.rpc('get_programs_for_org', {
+                p_org_id: marketer.organization_id,
+            });
+            if (cancelled) return;
+            if (!error && Array.isArray(data)) {
+                setPrograms((data as { name: string }[]).map((row) => row.name));
+            } else {
+                setPrograms([]);
+            }
+            setProgramsLoading(false);
+        })();
+        return () => { cancelled = true; };
+    }, [marketer?.organization_id]);
 
     // Form Data State
     const [formData, setFormData] = useState({
@@ -251,8 +275,8 @@ const ReferralFormPage: React.FC = () => {
                         value={formData.serviceProgramRequested}
                         onChange={handleChange}
                         required
-                        options={['CCSP', 'GAPP', 'ICWP', 'SFC', 'SOURCE', 'Not Sure']}
-                        placeholder="Select Program"
+                        options={programs}
+                        placeholder={programsLoading ? 'Loading…' : (programs.length === 0 ? 'No programs available' : 'Select Program')}
                     />
                 </InputWrapper>
             </div>
