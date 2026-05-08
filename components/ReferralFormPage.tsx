@@ -14,7 +14,7 @@ const InputWrapper = ({ label, required = false, children }: { label: string, re
     </div>
 );
 
-const BaseInput = ({ name, type = 'text', placeholder, required = false, value, onChange, disabled = false, maxLength }: any) => (
+const BaseInput = ({ name, type = 'text', placeholder, required = false, value, onChange, disabled = false, maxLength, pattern, title }: any) => (
     <input
         type={type}
         name={name}
@@ -23,6 +23,8 @@ const BaseInput = ({ name, type = 'text', placeholder, required = false, value, 
         required={required}
         disabled={disabled}
         maxLength={maxLength}
+        pattern={pattern}
+        title={title}
         className="block w-full max-w-full h-14 bg-slate-50 border border-slate-200 rounded-2xl px-4 sm:px-6 outline-none focus:ring-2 focus:ring-mint focus:border-transparent transition-all font-medium text-navy placeholder:text-slate-400 disabled:opacity-60 disabled:cursor-not-allowed"
         placeholder={placeholder}
     />
@@ -215,12 +217,16 @@ const ReferralFormPage: React.FC = () => {
                 else if (cleaned.length < 7) newValue = `(${cleaned.slice(0, 3)}) ${cleaned.slice(3)}`;
                 else newValue = `(${cleaned.slice(0, 3)}) ${cleaned.slice(3, 6)}-${cleaned.slice(6, 10)}`;
             }
-            // Format SSN / Medicaid
+            // Format SSN (9 digits) or GA Medicaid (12 digits) — auto-detect by digit count
             else if (name === 'gaMedicaidOrSSN') {
-                const cleaned = value.replace(/\D/g, '');
-                if (cleaned.length < 4) newValue = cleaned;
-                else if (cleaned.length < 6) newValue = `${cleaned.slice(0, 3)}-${cleaned.slice(3)}`;
-                else newValue = `${cleaned.slice(0, 3)}-${cleaned.slice(3, 5)}-${cleaned.slice(5, 9)}`;
+                const cleaned = value.replace(/\D/g, '').slice(0, 12);
+                if (cleaned.length <= 9) {
+                    if (cleaned.length < 4) newValue = cleaned;
+                    else if (cleaned.length < 6) newValue = `${cleaned.slice(0, 3)}-${cleaned.slice(3)}`;
+                    else newValue = `${cleaned.slice(0, 3)}-${cleaned.slice(3, 5)}-${cleaned.slice(5, 9)}`;
+                } else {
+                    newValue = `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(6, 9)}-${cleaned.slice(9, 12)}`;
+                }
             }
 
             setFormData(prev => ({
@@ -295,7 +301,16 @@ const ReferralFormPage: React.FC = () => {
                         <BaseInput type="date" name="referralDOB" value={formData.referralDOB} onChange={handleChange} required />
                     </InputWrapper>
                     <InputWrapper label="GA Medicaid or SS#" required>
-                        <BaseInput name="gaMedicaidOrSSN" value={formData.gaMedicaidOrSSN} onChange={handleChange} required placeholder="--- -- ----" maxLength={11} />
+                        <BaseInput
+                            name="gaMedicaidOrSSN"
+                            value={formData.gaMedicaidOrSSN}
+                            onChange={handleChange}
+                            required
+                            placeholder="XXX-XXX-XXX-XXX or XXX-XX-XXXX"
+                            maxLength={15}
+                            pattern="^(\d{3}-\d{2}-\d{4}|\d{3}-\d{3}-\d{3}-\d{3})$"
+                            title="Enter a 9-digit SSN or 12-digit GA Medicaid number"
+                        />
                     </InputWrapper>
                     <InputWrapper label="Phone #" required>
                         <BaseInput type="tel" name="phone" value={formData.phone} onChange={handleChange} required placeholder="(###) ###-####" maxLength={14} />
