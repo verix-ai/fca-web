@@ -29,7 +29,7 @@ const RoleSelectionPage: React.FC = () => {
             icon: Users,
             color: 'bg-sky',
             textColor: 'text-navy',
-            link: 'https://fca-web-pied.vercel.app/',
+            link: 'https://app.friendlycareagency.org/login',
             isExternal: true
         }
     ];
