@@ -67,22 +67,6 @@ const RadioGroup = ({ name, options, value, onChange, required = false }: any) =
     </div>
 );
 
-const Checkbox = ({ name, label, checked, onChange }: any) => (
-    <label className="flex items-center gap-3 cursor-pointer group p-2 -ml-2 rounded-xl hover:bg-slate-50 transition-colors">
-        <div className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-colors ${checked ? 'bg-mint border-mint' : 'border-slate-300 group-hover:border-mint/50 bg-white'}`}>
-            {checked && <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" /></svg>}
-        </div>
-        <input
-            type="checkbox"
-            name={name}
-            checked={checked}
-            onChange={onChange}
-            className="hidden"
-        />
-        <span className="font-medium text-navy">{label}</span>
-    </label>
-);
-
 const ReferralFormPage: React.FC = () => {
     const { slug } = useParams();
 
@@ -144,7 +128,7 @@ const ReferralFormPage: React.FC = () => {
 
     // Form Data State
     const [formData, setFormData] = useState({
-        // Step 1: Intake & Referral Information / Referral & Caregiver Details
+        // Step 1: Intake & Referral Information / Client & Caregiver Details
         serviceProgramRequested: '',
         referralName: '',
         sex: '',
@@ -191,7 +175,7 @@ const ReferralFormPage: React.FC = () => {
     const steps = [
         { num: 1, title: 'Intake & Referral Info', icon: <User size={20} /> },
         { num: 2, title: 'Location & Living', icon: <Building size={20} /> },
-        { num: 3, title: 'Benefits & Services', icon: <HeartPulse size={20} /> },
+        { num: 3, title: 'Benefits & Medical', icon: <HeartPulse size={20} /> },
         { num: 4, title: 'Referral Source', icon: <FileText size={20} /> }
     ];
 
@@ -288,16 +272,16 @@ const ReferralFormPage: React.FC = () => {
             </div>
 
             <div className="pt-6 border-t border-slate-100">
-                <h3 className="text-2xl font-black text-navy mb-2">Referral & Caregiver Details</h3>
+                <h3 className="text-2xl font-black text-navy mb-2">Client & Caregiver Details</h3>
                 <p className="text-slate-500 mb-6">Information about the client and their primary caregiver.</p>
                 <div className="grid md:grid-cols-2 gap-6">
-                    <InputWrapper label="Referral Name" required>
+                    <InputWrapper label="Client Name" required>
                         <BaseInput name="referralName" value={formData.referralName} onChange={handleChange} required placeholder="Client's Full Name" />
                     </InputWrapper>
                     <InputWrapper label="Sex" required>
                         <BaseSelect name="sex" value={formData.sex} onChange={handleChange} required options={['Female', 'Male', 'Prefer not to say']} placeholder="Select Sex" />
                     </InputWrapper>
-                    <InputWrapper label="Referral DOB" required>
+                    <InputWrapper label="Client DOB" required>
                         <BaseInput type="date" name="referralDOB" value={formData.referralDOB} onChange={handleChange} required />
                     </InputWrapper>
                     <InputWrapper label="GA Medicaid or SS#" required>
@@ -395,8 +379,8 @@ const ReferralFormPage: React.FC = () => {
     const renderStep3 = () => (
         <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div>
-                <h3 className="text-2xl font-black text-navy mb-2">Benefits & Services</h3>
-                <p className="text-slate-500">Medical information and assistance required.</p>
+                <h3 className="text-2xl font-black text-navy mb-2">Benefits & Medical</h3>
+                <p className="text-slate-500">Medical information and benefits details.</p>
             </div>
 
             <div className="grid gap-8 p-5 sm:p-8 bg-slate-50 rounded-3xl border border-slate-100">
@@ -406,7 +390,7 @@ const ReferralFormPage: React.FC = () => {
 
                 {formData.receivesBenefits === 'Yes' && (
                     <div className="animate-in fade-in slide-in-from-top-2">
-                        <InputWrapper label="Received on the 1st or 3rd?">
+                        <InputWrapper label="Do you receive your check on the 1st or 3rd?">
                             <RadioGroup name="benefitsReceivedOn" options={['1st', '3rd']} value={formData.benefitsReceivedOn} onChange={handleChange} />
                         </InputWrapper>
                     </div>
@@ -414,28 +398,11 @@ const ReferralFormPage: React.FC = () => {
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
-                <InputWrapper label="Physician's Full Name & Location" required>
-                    <BaseInput name="physicianNameLocation" value={formData.physicianNameLocation} onChange={handleChange} required placeholder="Dr. Smith, Grady Memorial" />
+                <InputWrapper label="Doctors Name" required>
+                    <BaseInput name="physicianNameLocation" value={formData.physicianNameLocation} onChange={handleChange} required placeholder="Dr. Smith" />
                 </InputWrapper>
-                <InputWrapper label="Member's Diagnosis/Disability" required>
+                <InputWrapper label="Client Diagnosis/Disability" required>
                     <BaseInput name="memberDiagnosis" value={formData.memberDiagnosis} onChange={handleChange} required placeholder="List primary diagnoses" />
-                </InputWrapper>
-            </div>
-
-            <div className="pt-4 border-t border-slate-100">
-                <InputWrapper label="Services Needed/Requested">
-                    <p className="text-sm text-slate-500 font-normal mb-4">Select all that apply to the client's needs.</p>
-                    <div className="grid sm:grid-cols-2 gap-y-2 gap-x-8">
-                        <Checkbox name="ambulatingTransferring" label="Ambulating/Transferring" checked={formData.servicesRequested.ambulatingTransferring} onChange={handleChange} />
-                        <Checkbox name="bathing" label="Bathing" checked={formData.servicesRequested.bathing} onChange={handleChange} />
-                        <Checkbox name="dressing" label="Dressing" checked={formData.servicesRequested.dressing} onChange={handleChange} />
-                        <Checkbox name="feeding" label="Feeding" checked={formData.servicesRequested.feeding} onChange={handleChange} />
-                        <Checkbox name="hygieneGrooming" label="Hygiene/Grooming" checked={formData.servicesRequested.hygieneGrooming} onChange={handleChange} />
-                        <Checkbox name="basicHousekeeping" label="Basic Housekeeping" checked={formData.servicesRequested.basicHousekeeping} onChange={handleChange} />
-                        <Checkbox name="errandAssistance" label="Errand Assistance" checked={formData.servicesRequested.errandAssistance} onChange={handleChange} />
-                        <Checkbox name="emergencyResponse" label="Emergency Response/Alert System or Device" checked={formData.servicesRequested.emergencyResponse} onChange={handleChange} />
-                        <Checkbox name="suppliesRequired" label="Do you require supplies to accommodate your individual needs?" checked={formData.servicesRequested.suppliesRequired} onChange={handleChange} />
-                    </div>
                 </InputWrapper>
             </div>
         </div>
@@ -450,7 +417,7 @@ const ReferralFormPage: React.FC = () => {
 
             <InputWrapper label="How did you hear about us?" required>
                 <div className="grid sm:grid-cols-2 gap-4 mt-4">
-                    {['Physician Referral', 'Signage in my Community', 'Family or Friend', 'Word of Mouth', 'Brochure or Handout from Resource Partners', 'Social Media', 'Other (specify)'].map(opt => (
+                    {['Physician Referral', 'Sign in the community', 'Family or Friend', 'Word of Mouth', 'Business Card or Postcard', 'Social Media', 'Other (specify)'].map(opt => (
                         <label key={opt} className="flex items-start gap-4 cursor-pointer group p-4 border border-slate-200 rounded-2xl hover:border-mint hover:bg-mint/5 transition-all">
                             <div className={`mt-1 flex-shrink-0 w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors ${formData.hearAboutUs === opt ? 'border-mint' : 'border-slate-300'}`}>
                                 {formData.hearAboutUs === opt && <div className="w-3 h-3 rounded-full bg-mint" />}
