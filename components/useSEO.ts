@@ -6,7 +6,11 @@ type SEOOptions = {
     title: string;
     description: string;
     path: string;
+    noindex?: boolean;
 };
+
+const DEFAULT_ROBOTS = 'index, follow, max-image-preview:large';
+const NOINDEX_ROBOTS = 'noindex, nofollow';
 
 const setMeta = (selector: string, attr: string, value: string) => {
     let el = document.head.querySelector<HTMLMetaElement>(selector);
@@ -30,7 +34,7 @@ const setCanonical = (href: string) => {
     el.setAttribute('href', href);
 };
 
-export function useSEO({ title, description, path }: SEOOptions) {
+export function useSEO({ title, description, path, noindex = false }: SEOOptions) {
     useEffect(() => {
         const url = `${SITE_ORIGIN}${path}`;
 
@@ -41,6 +45,7 @@ export function useSEO({ title, description, path }: SEOOptions) {
         setMeta('meta[property="og:url"]', 'content', url);
         setMeta('meta[name="twitter:title"]', 'content', title);
         setMeta('meta[name="twitter:description"]', 'content', description);
+        setMeta('meta[name="robots"]', 'content', noindex ? NOINDEX_ROBOTS : DEFAULT_ROBOTS);
         setCanonical(url);
-    }, [title, description, path]);
+    }, [title, description, path, noindex]);
 }

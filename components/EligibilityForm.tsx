@@ -1,9 +1,16 @@
 import React, { useRef, useState } from 'react';
-import { ArrowUpRight, CheckCircle } from 'lucide-react';
+import { ArrowUpRight, CheckCircle, XCircle } from 'lucide-react';
 import { trackInitiateCheckout, trackLead } from '../lib/pixel';
 
 const SUBMIT_LEAD_URL = 'https://fupcxuwfonuajbblwlfd.supabase.co/functions/v1/submit-lead';
 const SUPPORT_PHONE = '(478) 973-4831';
+
+// Georgia ZIP code ranges per USPS: 30000–31999 (main) and 39800–39999 (extreme SW).
+const isGeorgiaZip = (zip: string): boolean => {
+    const z = parseInt(zip.replace(/\D/g, ''), 10);
+    if (Number.isNaN(z)) return false;
+    return (z >= 30000 && z <= 31999) || (z >= 39800 && z <= 39999);
+};
 
 type FormFields = {
     full_name: string;
@@ -46,7 +53,16 @@ const validate = (data: FormFields): FieldErrors => {
     return errors;
 };
 
-const EligibilityForm: React.FC = () => {
+type EligibilityFormProps = {
+    /**
+     * When true, after a successful submit, an out-of-Georgia ZIP shows a
+     * "doesn't qualify" message instead of the standard thank-you. The lead
+     * is still submitted to the leads board either way.
+     */
+    outOfStateCheck?: boolean;
+};
+
+const EligibilityForm: React.FC<EligibilityFormProps> = ({ outOfStateCheck = false }) => {
     const [formData, setFormData] = useState<FormFields>({
         full_name: '',
         phone: '',
@@ -58,6 +74,7 @@ const EligibilityForm: React.FC = () => {
     const [hasAttemptedSubmit, setHasAttemptedSubmit] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [submittedZip, setSubmittedZip] = useState('');
     const [submitError, setSubmitError] = useState<string | null>(null);
     const hasTrackedFormStart = useRef(false);
 
@@ -131,6 +148,7 @@ const EligibilityForm: React.FC = () => {
 
             if (res.ok) {
                 trackLead({ content_name: 'Eligibility Check' });
+                setSubmittedZip(formData.zip.trim());
                 setIsSubmitted(true);
                 return;
             }
@@ -152,6 +170,9 @@ const EligibilityForm: React.FC = () => {
     const inputClass = "w-full h-14 px-6 rounded-[20px] bg-white border-2 border-[#81c567] focus:border-[#81c567] focus:ring-1 focus:ring-[#81c567] focus:outline-none transition-colors font-medium text-navy placeholder:text-slate-400";
     const labelClass = "text-sm font-bold text-navy uppercase tracking-wider ml-4";
     const errorClass = "text-xs font-medium text-red-600 ml-4 mt-1";
+    const requiredMark = <span aria-hidden="true" className="text-red-500 ml-1">*</span>;
+
+    const isFormValid = Object.keys(validate(formData)).length === 0;
 
     return (
         <section id="eligibility" className="py-24 px-4 bg-[#f4f2ee]">
@@ -161,17 +182,31 @@ const EligibilityForm: React.FC = () => {
                 </h2>
 
                 {isSubmitted ? (
-                    <div className="bg-[#f4f2ee] p-8 md:p-12 rounded-[40px] border border-slate-100 shadow-xl shadow-slate-200/50 text-center">
-                        <div className="w-20 h-20 bg-mint/30 rounded-full flex items-center justify-center text-navy mx-auto mb-6">
-                            <CheckCircle size={48} strokeWidth={2.5} />
+                    outOfStateCheck && !isGeorgiaZip(submittedZip) ? (
+                        <div className="bg-[#f4f2ee] p-8 md:p-12 rounded-[40px] border border-slate-100 shadow-xl shadow-slate-200/50 text-center">
+                            <div className="w-20 h-20 bg-red-100 rounded-full flex items-center justify-center text-red-600 mx-auto mb-6">
+                                <XCircle size={48} strokeWidth={2.5} />
+                            </div>
+                            <h3 className="text-2xl md:text-3xl font-black text-navy mb-4 tracking-tight">
+                                Sorry — You Don't Qualify
+                            </h3>
+                            <p className="text-lg text-slate-600 max-w-xl mx-auto">
+                                Unfortunately, Friendly Care Agency only services the state of Georgia. We're unable to provide services outside of Georgia at this time.
+                            </p>
                         </div>
-                        <h3 className="text-2xl md:text-3xl font-black text-navy mb-4 tracking-tight">
-                            Thanks! We've Got It.
-                        </h3>
-                        <p className="text-lg text-slate-600 max-w-xl mx-auto">
-                            We've received your information and someone from our team will be in touch shortly.
-                        </p>
-                    </div>
+                    ) : (
+                        <div className="bg-[#f4f2ee] p-8 md:p-12 rounded-[40px] border border-slate-100 shadow-xl shadow-slate-200/50 text-center">
+                            <div className="w-20 h-20 bg-mint/30 rounded-full flex items-center justify-center text-navy mx-auto mb-6">
+                                <CheckCircle size={48} strokeWidth={2.5} />
+                            </div>
+                            <h3 className="text-2xl md:text-3xl font-black text-navy mb-4 tracking-tight">
+                                Thanks! We've Got It.
+                            </h3>
+                            <p className="text-lg text-slate-600 max-w-xl mx-auto">
+                                We've received your information and someone from our team will be in touch shortly.
+                            </p>
+                        </div>
+                    )
                 ) : (
                     <form
                         onSubmit={handleSubmit}
@@ -180,7 +215,7 @@ const EligibilityForm: React.FC = () => {
                     >
                         <div className="grid md:grid-cols-2 gap-6 mb-8">
                             <div className="space-y-2 text-left">
-                                <label htmlFor="name" className={labelClass}>Full Name</label>
+                                <label htmlFor="name" className={labelClass}>Full Name{requiredMark}</label>
                                 <input
                                     type="text"
                                     id="name"
@@ -188,6 +223,7 @@ const EligibilityForm: React.FC = () => {
                                     onChange={updateField('full_name')}
                                     aria-invalid={!!errors.full_name}
                                     aria-describedby={errors.full_name ? 'name-error' : undefined}
+                                    aria-required="true"
                                     autoComplete="name"
                                     className={inputClass}
                                     placeholder="John Doe"
@@ -196,7 +232,7 @@ const EligibilityForm: React.FC = () => {
                             </div>
 
                             <div className="space-y-2 text-left">
-                                <label htmlFor="phone" className={labelClass}>Phone Number</label>
+                                <label htmlFor="phone" className={labelClass}>Phone Number{requiredMark}</label>
                                 <input
                                     type="tel"
                                     id="phone"
@@ -204,6 +240,7 @@ const EligibilityForm: React.FC = () => {
                                     onChange={updateField('phone')}
                                     aria-invalid={!!errors.phone}
                                     aria-describedby={errors.phone ? 'phone-error' : undefined}
+                                    aria-required="true"
                                     inputMode="tel"
                                     autoComplete="tel-national"
                                     maxLength={14}
@@ -214,7 +251,7 @@ const EligibilityForm: React.FC = () => {
                             </div>
 
                             <div className="space-y-2 text-left">
-                                <label htmlFor="email" className={labelClass}>Email Address</label>
+                                <label htmlFor="email" className={labelClass}>Email Address{requiredMark}</label>
                                 <input
                                     type="email"
                                     id="email"
@@ -222,6 +259,7 @@ const EligibilityForm: React.FC = () => {
                                     onChange={updateField('email')}
                                     aria-invalid={!!errors.email}
                                     aria-describedby={errors.email ? 'email-error' : undefined}
+                                    aria-required="true"
                                     autoComplete="email"
                                     className={inputClass}
                                     placeholder="john@example.com"
@@ -230,7 +268,7 @@ const EligibilityForm: React.FC = () => {
                             </div>
 
                             <div className="space-y-2 text-left">
-                                <label htmlFor="zip" className={labelClass}>Client Zipcode</label>
+                                <label htmlFor="zip" className={labelClass}>Client Zipcode{requiredMark}</label>
                                 <input
                                     type="text"
                                     id="zip"
@@ -241,6 +279,7 @@ const EligibilityForm: React.FC = () => {
                                     onChange={updateField('zip')}
                                     aria-invalid={!!errors.zip}
                                     aria-describedby={errors.zip ? 'zip-error' : undefined}
+                                    aria-required="true"
                                     className={inputClass}
                                     placeholder="12345"
                                 />
@@ -280,8 +319,9 @@ const EligibilityForm: React.FC = () => {
                         <div className="flex justify-center">
                             <button
                                 type="submit"
-                                disabled={isSubmitting}
-                                className="group flex items-center bg-mint h-16 pl-10 pr-2 rounded-[24px] hover:brightness-95 transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                                disabled={isSubmitting || !isFormValid}
+                                aria-disabled={isSubmitting || !isFormValid}
+                                className="group flex items-center bg-mint h-16 pl-10 pr-2 rounded-[24px] hover:brightness-95 transition-all disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:brightness-100"
                             >
                                 <span className="font-black text-navy text-sm uppercase tracking-[0.2em] mr-6">
                                     {isSubmitting ? 'Submitting…' : 'Check My Eligibility'}

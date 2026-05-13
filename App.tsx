@@ -12,7 +12,10 @@ import ContactUsPage from './components/ContactUsPage';
 import FAQPage from './components/FAQPage';
 import Footer from './components/Footer';
 import ReferralFormPage from './components/ReferralFormPage';
+import QualifyPage from './components/QualifyPage';
 import { trackPageView } from './lib/pixel';
+
+const BARE_LAYOUT_PATHS = new Set(['/qualify']);
 
 const App: React.FC = () => {
   const { pathname, hash, key } = useLocation();
@@ -44,9 +47,11 @@ const App: React.FC = () => {
     trackPageView();
   }, [pathname]);
 
+  const isBareLayout = BARE_LAYOUT_PATHS.has(pathname);
+
   return (
     <div className="main-frame flex flex-col gap-2">
-      <Header />
+      {!isBareLayout && <Header />}
 
       <main id="main-content">
         <Routes>
@@ -57,6 +62,7 @@ const App: React.FC = () => {
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/faq" element={<FAQPage />} />
+          <Route path="/qualify" element={<QualifyPage />} />
           <Route path="/ref/:slug" element={<ReferralFormPage />} />
           {/* Backward compat for any printed materials with /rf/<slug> */}
           <Route path="/rf/:slug" element={<RefRedirect />} />
@@ -66,7 +72,7 @@ const App: React.FC = () => {
         </Routes>
       </main>
 
-      <Footer />
+      {!isBareLayout && <Footer />}
     </div>
   );
 };
