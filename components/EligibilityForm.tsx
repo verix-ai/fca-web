@@ -3,7 +3,7 @@ import { ArrowUpRight, CheckCircle, XCircle } from 'lucide-react';
 import { trackInitiateCheckout, trackLead } from '../lib/pixel';
 
 const SUBMIT_LEAD_URL = 'https://fupcxuwfonuajbblwlfd.supabase.co/functions/v1/submit-lead';
-const SUPPORT_PHONE = '(478) 973-4831';
+const SUPPORT_PHONE = '(478) 390-7749';
 
 // Georgia ZIP code ranges per USPS: 30000–31999 (main) and 39800–39999 (extreme SW).
 const isGeorgiaZip = (zip: string): boolean => {

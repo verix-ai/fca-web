@@ -23,7 +23,7 @@ const FAQPage: React.FC = () => {
                         <>
                             Payment is based on your location. Please call us to find out your rates. (
                             <a
-                                href="tel:4789734831"
+                                href="tel:4783907749"
                                 onClick={() => trackCustom('PhoneClick', { source: 'faq-page' })}
                                 className="text-mint hover:text-navy transition-colors font-bold underline"
                             >

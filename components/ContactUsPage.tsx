@@ -5,7 +5,7 @@ import { trackContact, trackCustom } from '../lib/pixel';
 
 const ContactUsPage: React.FC = () => {
     useSEO({
-        title: 'Contact Friendly Care Agency | Call (478) 973-4831',
+        title: 'Contact Friendly Care Agency | Call (478) 390-7749',
         description: 'Reach Friendly Care Agency by phone, email, or message. Our Georgia-based team responds within 24 hours and is available Mon–Fri, 9am–5pm EST.',
         path: '/contact-us',
     });
@@ -68,11 +68,11 @@ const ContactUsPage: React.FC = () => {
                             <h3 className="text-xl font-black text-navy mb-2">Give Us A Call</h3>
                             <p className="text-slate-500 font-medium mb-4">Available Mon-Fri, 9am-5pm EST</p>
                             <a
-                                href="tel:+14789734831"
+                                href="tel:+14783907749"
                                 onClick={() => trackCustom('PhoneClick', { source: 'contact-page-card' })}
                                 className="text-lg font-bold text-mint hover:text-navy transition-colors"
                             >
-                                (478) 973-4831
+                                (478) 390-7749
                             </a>
                         </div>
 

@@ -51,7 +51,7 @@ const Header: React.FC = () => {
         <Link to="/role-selection" aria-label="Sign in or create an account" className="hidden w-14 md:w-20 h-full md:flex items-center justify-center bg-mint rounded-[24px] text-navy hover:brightness-95 transition-all">
           <User size={24} strokeWidth={2.5} aria-hidden="true" />
         </Link>
-        <a href="tel:+14789734831" onClick={() => trackCustom('PhoneClick', { source: 'header-desktop' })} aria-label="Call Friendly Care Agency at (478) 973-4831" className="w-14 md:w-auto md:px-10 h-full flex items-center justify-center bg-mint rounded-[24px] text-navy font-black uppercase text-[10px] md:text-xs tracking-[0.2em] hover:brightness-95 transition-all whitespace-nowrap">
+        <a href="tel:+14783907749" onClick={() => trackCustom('PhoneClick', { source: 'header-desktop' })} aria-label="Call Friendly Care Agency at (478) 390-7749" className="w-14 md:w-auto md:px-10 h-full flex items-center justify-center bg-mint rounded-[24px] text-navy font-black uppercase text-[10px] md:text-xs tracking-[0.2em] hover:brightness-95 transition-all whitespace-nowrap">
           <Phone size={22} className="md:hidden" strokeWidth={2.5} aria-hidden="true" />
           <span className="hidden md:inline">Call Today</span>
         </a>
@@ -109,12 +109,12 @@ const Header: React.FC = () => {
               <span className="text-xs tracking-wider uppercase">Account</span>
             </Link>
             <a
-              href="tel:+14789734831"
+              href="tel:+14783907749"
               onClick={() => {
                 trackCustom('PhoneClick', { source: 'header-mobile' });
                 setIsMenuOpen(false);
               }}
-              aria-label="Call Friendly Care Agency at (478) 973-4831"
+              aria-label="Call Friendly Care Agency at (478) 390-7749"
               className="flex-1 h-14 flex items-center justify-center gap-2 bg-mint rounded-[16px] text-navy font-bold hover:brightness-95 transition-all"
             >
               <Phone size={20} strokeWidth={2.5} aria-hidden="true" />
