@@ -45,6 +45,12 @@ const BaseSelect = ({ name, required = false, value, onChange, options, placehol
     </select>
 );
 
+const RELATIONSHIPS = [
+    'Mother', 'Father', 'Daughter', 'Son', 'Sister', 'Brother',
+    'Cousin', 'Grandchild', 'In-Law', 'Step-Parent', 'Step-Sibling',
+    'Friend', 'Partner', 'Grandparent', 'Niece', 'Nephew'
+];
+
 const RadioGroup = ({ name, options, value, onChange, required = false }: any) => (
     <div className="flex flex-wrap gap-4 mt-2">
         {options.map((opt: string) => (
@@ -138,6 +144,10 @@ const ReferralFormPage: React.FC = () => {
         caregiverName: '',
         caregiverRelationship: '',
         caregiverPhone: '',
+        emergencySameAsCaregiver: false,
+        emergencyContactName: '',
+        emergencyContactRelationship: '',
+        emergencyContactPhone: '',
 
         // Step 2: Location & Living Situation
         streetAddress: '',
@@ -182,7 +192,10 @@ const ReferralFormPage: React.FC = () => {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value, type } = e.target;
 
-        if (type === 'checkbox') {
+        if (name === 'emergencySameAsCaregiver') {
+            const checked = (e.target as HTMLInputElement).checked;
+            setFormData(prev => ({ ...prev, emergencySameAsCaregiver: checked }));
+        } else if (type === 'checkbox') {
             const checked = (e.target as HTMLInputElement).checked;
             setFormData(prev => ({
                 ...prev,
@@ -195,7 +208,7 @@ const ReferralFormPage: React.FC = () => {
             let newValue = value;
 
             // Format phone numbers
-            if (name === 'phone' || name === 'caregiverPhone') {
+            if (name === 'phone' || name === 'caregiverPhone' || name === 'emergencyContactPhone') {
                 const cleaned = value.replace(/\D/g, '');
                 if (cleaned.length < 4) newValue = cleaned;
                 else if (cleaned.length < 7) newValue = `(${cleaned.slice(0, 3)}) ${cleaned.slice(3)}`;
@@ -311,11 +324,7 @@ const ReferralFormPage: React.FC = () => {
                             value={formData.caregiverRelationship}
                             onChange={handleChange}
                             required
-                            options={[
-                                'Mother', 'Father', 'Daughter', 'Son', 'Sister', 'Brother',
-                                'Cousin', 'Grandchild', 'In-Law', 'Step-Parent', 'Step-Sibling',
-                                'Friend', 'Partner', 'Grandparent', 'Niece', 'Nephew'
-                            ]}
+                            options={RELATIONSHIPS}
                             placeholder="Select Relationship"
                         />
                     </InputWrapper>
@@ -328,6 +337,40 @@ const ReferralFormPage: React.FC = () => {
                         <RadioGroup name="caregiverLivesInHome" options={['Yes', 'No']} value={formData.caregiverLivesInHome} onChange={handleChange} required />
                     </InputWrapper>
                 </div>
+            </div>
+
+            <div className="pt-6 border-t border-slate-100">
+                <h3 className="text-2xl font-black text-navy mb-2">Emergency Contact</h3>
+                <p className="text-slate-500 mb-6">Who should we call in an emergency?</p>
+                <label className="flex items-center gap-3 cursor-pointer mb-6">
+                    <input
+                        type="checkbox"
+                        name="emergencySameAsCaregiver"
+                        checked={formData.emergencySameAsCaregiver}
+                        onChange={handleChange}
+                        className="w-5 h-5 accent-mint cursor-pointer"
+                    />
+                    <span className="font-medium text-navy">Same as caregiver</span>
+                </label>
+                {!formData.emergencySameAsCaregiver && (
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <InputWrapper label="Emergency Contact Name">
+                            <BaseInput name="emergencyContactName" value={formData.emergencyContactName} onChange={handleChange} placeholder="Contact's Full Name" />
+                        </InputWrapper>
+                        <InputWrapper label="Relationship To Client">
+                            <BaseSelect
+                                name="emergencyContactRelationship"
+                                value={formData.emergencyContactRelationship}
+                                onChange={handleChange}
+                                options={RELATIONSHIPS}
+                                placeholder="Select Relationship"
+                            />
+                        </InputWrapper>
+                        <InputWrapper label="Emergency Contact Phone #">
+                            <BaseInput type="tel" name="emergencyContactPhone" value={formData.emergencyContactPhone} onChange={handleChange} placeholder="(###) ###-####" maxLength={14} />
+                        </InputWrapper>
+                    </div>
+                )}
             </div>
         </div>
     );

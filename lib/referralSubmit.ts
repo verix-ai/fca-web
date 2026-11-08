@@ -26,6 +26,10 @@ export interface FormState {
   caregiverName: string;
   caregiverRelationship: string;
   caregiverPhone: string;
+  emergencySameAsCaregiver: boolean;
+  emergencyContactName: string;
+  emergencyContactRelationship: string;
+  emergencyContactPhone: string;
   streetAddress: string;
   aptSuite: string;
   city: string;
@@ -65,6 +69,18 @@ export async function submitReferral(slug: string, form: FormState, honeypot: st
     caregiver_relationship: form.caregiverRelationship,
     caregiver_phone: form.caregiverPhone,
     caregiver_lives_in_home: form.caregiverLivesInHome,
+    // Optional; the Edge Function spreads unknown keys into referrals.notes as-is.
+    ...(form.emergencySameAsCaregiver
+      ? {
+          emergency_contact_name: form.caregiverName,
+          emergency_contact_relationship: form.caregiverRelationship,
+          emergency_contact_phone: form.caregiverPhone,
+        }
+      : {
+          emergency_contact_name: form.emergencyContactName || undefined,
+          emergency_contact_relationship: form.emergencyContactRelationship || undefined,
+          emergency_contact_phone: form.emergencyContactPhone || undefined,
+        }),
     address_line1: form.streetAddress,
     address_line2: form.aptSuite || undefined,
     city: form.city,
